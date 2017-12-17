@@ -127,11 +127,7 @@ public IM_capsulation parse_packet(byte[] raw_packet) throws UnsupportedEncoding
  * @return true if is legal
  */
 public boolean headers_check(String [] lines) {
-	if (lines[0].equals(first_line) &&lines[1].equals(User_agent) ) {
-		return true;
-	}else {
-		return false;
-	}
+return lines[0].equals(first_line) &&lines[1].equals(User_agent);
 	
 	
 }
