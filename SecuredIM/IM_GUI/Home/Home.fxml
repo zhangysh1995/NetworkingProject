@@ -6,41 +6,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="439.0" prefWidth="273.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="IM_GUI.Home.HomeController">
    <children>
       <Accordion layoutY="64.0" prefHeight="333.0" prefWidth="273.0">
         <panes>
           <TitledPane animated="false" prefHeight="260.0" prefWidth="273.0" text="Friends">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <ListView prefHeight="253.0" prefWidth="267.0" />
-                     </content>
-                  </ScrollPane>
+                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="friendList"/>
                </content>
             </TitledPane>
             <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Groups">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <ListView prefHeight="251.0" prefWidth="267.0" />
-                     </content>
-                  </ScrollPane>
+                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="groupList"/>
                </content>
             </TitledPane>
             <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Blocked">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <ListView prefHeight="253.0" prefWidth="267.0" />
-                     </content>
-                  </ScrollPane>
+                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="blockedList"/>
                </content>
             </TitledPane>
         </panes>
       </Accordion>
-      <MenuBar prefHeight="69.0" prefWidth="273.0">
+      <MenuBar prefHeight="69.0" prefWidth="270.0">
         <menus>
           <Menu mnemonicParsing="false" text="About">
             <items>
@@ -55,21 +45,21 @@
           </Menu>
         </menus>
       </MenuBar>
-      <MenuBar layoutY="397.0" prefHeight="57.0" prefWidth="273.0">
+      <MenuBar layoutY="397.0" prefHeight="41.0" prefWidth="273.0">
         <menus>
           <Menu mnemonicParsing="false" text="Contacts">
             <items>
-              <MenuItem mnemonicParsing="false" text="Add" />
+              <MenuItem mnemonicParsing="false" text="Add" fx:id="addFriend"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Group">
             <items>
-              <MenuItem mnemonicParsing="false" text="New" />
+              <MenuItem mnemonicParsing="false" text="New" fx:id="addGroup"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="About" fx:id="About"/>
             </items>
           </Menu>
         </menus>
