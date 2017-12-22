@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Accordion layoutY="64.0" prefHeight="333.0" prefWidth="273.0">
+        <panes>
+          <TitledPane animated="false" prefHeight="260.0" prefWidth="273.0" text="Friends">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <ListView prefHeight="253.0" prefWidth="267.0" />
+                     </content>
+                  </ScrollPane>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Groups">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <ListView prefHeight="251.0" prefWidth="267.0" />
+                     </content>
+                  </ScrollPane>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Blocked">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <ListView prefHeight="253.0" prefWidth="267.0" />
+                     </content>
+                  </ScrollPane>
+               </content>
+            </TitledPane>
+        </panes>
+      </Accordion>
+      <MenuBar prefHeight="69.0" prefWidth="273.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="About">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Me">
+            <items>
+              <MenuItem mnemonicParsing="false" text="My profile" />
+                  <MenuItem mnemonicParsing="false" text="Log Out" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <MenuBar layoutY="397.0" prefHeight="57.0" prefWidth="273.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Contacts">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Add" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Group">
+            <items>
+              <MenuItem mnemonicParsing="false" text="New" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</Pane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="IM_GUI.SecuredIM"
+          alignment="center" hgap="10" vgap="10">
+    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+
+    <!--add components-->
+    <Label text="Welcome" GridPane.rowIndex="0" GridPane.columnIndex="0"
+           GridPane.columnSpan="2"/>
+    <!--Username-->
+    <Label text="E-mail" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <!--Lock key-->
+    <Label text="Key" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <PasswordField GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <HBox spacing="10" alignment="bottom_right"
+          GridPane.rowIndex="4" GridPane.columnIndex="1">
+        <Button text="Sign In" fx:id="signIn" onAction="#handleLogin"/>
+    </HBox>
+
+    <!--actions-->
+
+</GridPane>
