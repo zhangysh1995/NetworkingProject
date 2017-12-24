@@ -1,4 +1,4 @@
-package cyy_IM_protocol;
+package DataManager;
 /**
  * This is the class abstraction for object
  * @author Ce

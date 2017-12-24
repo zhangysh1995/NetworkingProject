@@ -1,4 +1,8 @@
 package cyy_IM_protocol;
+
+import DataManager.Group;
+import DataManager.User;
+
 /**
  * This is the Message Class
  * @author Ce

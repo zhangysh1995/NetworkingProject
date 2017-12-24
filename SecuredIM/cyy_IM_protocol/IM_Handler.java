@@ -1,5 +1,8 @@
 package cyy_IM_protocol;
 
+import DataManager.Group;
+import DataManager.User;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Map.Entry;
 import java.util.Set;

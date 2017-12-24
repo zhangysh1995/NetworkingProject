@@ -1,4 +1,4 @@
-package cyy_IM_protocol;
+package DataManager;
 
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
