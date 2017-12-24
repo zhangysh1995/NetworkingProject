@@ -2,12 +2,15 @@ package protocol;
 
 import cyy_IM_protocol.IM_Handler;
 import cyy_IM_protocol.IM_capsulation;
+import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 
-public class Test {
 
-	public static void main(String[] args) {
+public class BasicProtocol {
+
+    @Test
+    public void testA() {
 		// TODO Auto-generated method stub
 		String testpacket = "CYY 1.0\r\n"
 							+"CYYClient 1.0\r\n"
