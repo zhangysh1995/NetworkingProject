@@ -1,4 +1,4 @@
-package protocol;
+package Protocol;
 
 import cyy_IM_protocol.IM_Handler;
 import cyy_IM_protocol.IM_capsulation;
