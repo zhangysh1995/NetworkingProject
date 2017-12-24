@@ -1,4 +1,7 @@
-package cyy_IM_protocol;
+package protocol;
+
+import cyy_IM_protocol.IM_Handler;
+import cyy_IM_protocol.IM_capsulation;
 
 import java.io.UnsupportedEncodingException;
 
@@ -11,7 +14,7 @@ public class Test {
 							+"GnuPG 2.0\r\n"
 							+"1234\r\n"
 							+"12345566\r\n"
-							+IM_Handler.ACTION_groupSending+"\r\n"
+							+ IM_Handler.ACTION_groupSending+"\r\n"
 							+"IMAP\r\n"
 							+"321\r\n"
 							+"mac@mail.sustc.edu.cn\r\n"
