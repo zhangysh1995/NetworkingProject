@@ -1,0 +1,57 @@
+ group 'imapim'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+ apply plugin: 'idea'
+
+ idea {
+     module {
+         downloadJavadoc = true
+         downloadSources = true
+     }
+ }
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    compile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.2'
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.58'
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcpg-jdk15on
+    compile group: 'org.bouncycastle', name: 'bcpg-jdk15on', version: '1.58'
+    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.0'
+    // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.0'
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.11.2'
+    // https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream
+    compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
+
+}
+
+ sourceSets {
+     main {
+         resources {
+             srcDirs = ["src/main/java"]
+             includes = ["**/*.fxml"]
+         }
+     }
+ }
+
+ jar {
+     manifest {
+         attributes 'Main-Class': 'imapim.ui.IM'
+     }
+     from (configurations.compile.collect { entry -> zipTree(entry) }) {
+         exclude 'META-INF/MANIFEST.MF'
+         exclude 'META-INF/*.SF'
+         exclude 'META-INF/*.DSA'
+         exclude 'META-INF/*.RSA'
+     }
+ }
