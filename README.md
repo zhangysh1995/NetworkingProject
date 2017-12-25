@@ -1,4 +1,4 @@
-# NetworkingProject
+# NetworkingProject [![Build Status](https://travis-ci.org/zhangysh1995/NetworkingProject.svg?branch=zys-2)](https://travis-ci.org/zhangysh1995/NetworkingProject)
 Group project of Computer Networking 2017 Fall@SUSTech
 
 ## Introduction

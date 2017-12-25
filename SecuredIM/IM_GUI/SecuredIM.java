@@ -15,6 +15,10 @@ public class SecuredIM extends Application {
     private static final Logger LOGGER =
             Logger.getLogger( SecuredIM.class.getName() );
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         // initialize welcome frame
