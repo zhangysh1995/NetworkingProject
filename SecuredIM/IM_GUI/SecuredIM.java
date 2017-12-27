@@ -44,6 +44,7 @@ public class SecuredIM extends Application {
 
         // set user's email address
         MailHandler.setMail(userEmail.getText());
+
         System.out.println("My email: " + userEmail.getText());
 
         // hide login window

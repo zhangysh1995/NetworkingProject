@@ -14,10 +14,7 @@ public class BasicMail {
     }
 
     @Test
-    public void testSendRequest() {
-        MailHandler.setMail("zhangyushao@zhangyushao.site");
-        MailHandler mailHandler = new MailHandler();
+    public void testReceive() {
 
-        mailHandler.sendRequestMail("zhangys3@mail.sustc.edu.cn");
     }
 }
