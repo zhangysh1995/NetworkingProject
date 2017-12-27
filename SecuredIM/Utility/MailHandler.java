@@ -17,7 +17,7 @@ public class MailHandler {
     private static String myMail;
     private String mySmtpServer;
 
-    private String request = "newFriendRequest";
+    private static String request = "newFriendRequest";
 //    private smtpServerList;
 
     private Properties props;
@@ -53,7 +53,7 @@ public class MailHandler {
     }
 
     public Boolean sendRequestMail(String toEmail) {
-        return sendMessage(toEmail, request);
+        return send(toEmail, request);
     }
 
     public Boolean sendMessage(String toEmail, String text ) {
@@ -96,7 +96,7 @@ public class MailHandler {
         } catch(MessagingException e) {
             System.err.println("Error when constructing the message");
         }
-
+        System.out.println("\tSent");
         return true;
     }
 
