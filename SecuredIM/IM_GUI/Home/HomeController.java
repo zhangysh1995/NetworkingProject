@@ -4,14 +4,16 @@ import DataManager.GroupManager;
 import DataManager.UserManager;
 import IM_GUI.ListView.FriendListViewController;
 import IM_GUI.ListView.GroupListViewController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
-import javafx.event.ActionEvent;
-import org.omg.PortableInterceptor.ACTIVE;
-
-import javax.swing.*;
+import java.io.IOException;
 
 public class HomeController {
     // listviews
@@ -41,16 +43,28 @@ public class HomeController {
 
     // TODO: use actual data to replace demo
     @FXML
-    private void addFriend(ActionEvent actionEvent) {
-        addFriend.setText("pressed");
-        userManager.addUser();
+    private void addFriend(ActionEvent actionEvent) throws IOException{
+//        addFriend.setText("pressed");
+//        userManager.addUser();
+        newWindow("AddUser.fxml");
+
     }
 
     @FXML
-    private void newGroup(ActionEvent actionEvemt) {
-        addGroup.setText("pressed");
-        groupManager.newGroup();
+    private void newGroup(ActionEvent actionEvent) throws IOException{
+//        addGroup.setText("pressed");
+//        groupManager.newGroup();
+        newWindow("NewGroup.fxml");
 
+    }
+
+    private void newWindow(String file) throws IOException{
+        Parent mainFrame = FXMLLoader.load(getClass().getResource(file));
+        Scene scene = new Scene(mainFrame);
+        Stage newStage = new Stage();
+
+        newStage.setScene(scene);
+        newStage.show();
     }
 
 }

@@ -14,7 +14,7 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -23,6 +23,7 @@ dependencies {
     compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.58'
     // https://mvnrepository.com/artifact/org.bouncycastle/bcpg-jdk15on
     compile group: 'org.bouncycastle', name: 'bcpg-jdk15on', version: '1.58'
+    compile 'name.neuhalfen.projects.crypto.bouncycastle.openpgp:bouncy-gpg:2.+'
 }
 
  sourceSets {
