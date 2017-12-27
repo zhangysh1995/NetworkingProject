@@ -26,8 +26,8 @@ public class HomeController {
     @FXML private MenuItem addGroup;
 
     // view controllers
-    private FriendListViewController friendLVC = new FriendListViewController();
-    private GroupListViewController groupLVC = new GroupListViewController();
+    private FriendListViewController friendLVC;
+    private GroupListViewController groupLVC;
     // TODO: BlockedViewController
 
     // delegate to managers
@@ -36,6 +36,8 @@ public class HomeController {
 
     @FXML
     public void initialize() {
+        friendLVC = new FriendListViewController();
+        groupLVC = new GroupListViewController();
         userManager = new UserManager();
         groupManager = new GroupManager();
         friendList.setItems(friendLVC.getFriendLVC());
@@ -46,7 +48,8 @@ public class HomeController {
     private void addFriend(ActionEvent actionEvent) throws IOException{
 //        addFriend.setText("pressed");
 //        userManager.addUser();
-        newWindow("AddUser.fxml");
+       newWindow("AddUser.fxml", friendLVC);
+//       userManager.addFriend()
 
     }
 
@@ -54,12 +57,14 @@ public class HomeController {
     private void newGroup(ActionEvent actionEvent) throws IOException{
 //        addGroup.setText("pressed");
 //        groupManager.newGroup();
-        newWindow("NewGroup.fxml");
+        newWindow("NewGroup.fxml", groupLVC);
 
     }
 
-    private void newWindow(String file) throws IOException{
-        Parent mainFrame = FXMLLoader.load(getClass().getResource(file));
+    private void newWindow(String file, Object controller) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
+        loader.setController(controller);
+        Parent mainFrame = loader.load();
         Scene scene = new Scene(mainFrame);
         Stage newStage = new Stage();
 

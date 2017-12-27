@@ -16,28 +16,32 @@ public class UserManager {
         friendList = new Vector<>(2);
     }
 
-    public Boolean setUserList(Vector<String> list) {
-            friendList = list;
-            return true;
-    }
+//    public Vector<String> addFriend(String email) {
+//        sentList.add(email);
+//    }
 
-    public Vector<String> getUserList() {
+    public static Vector<String> getFriendList() {
         return friendList;
     }
 
-    // add new friend
-    @FXML private TextField email;
-    @FXML private TextField notes;
+    public static void setFriendList(Vector<String> friendList) {
+        UserManager.friendList = friendList;
+    }
 
-    private MailHandler mailHandler = new MailHandler();
+    public static Vector<String> getRequestList() {
+        return requestList;
+    }
 
-    @FXML
-    public Vector<String> addFriend(ActionEvent actionEvent) {
-        //
-        if(mailHandler.sendRequestMail(email.getText())) {
-            email.getScene().getWindow().hide(); // hide addFriend window
-        }
-        return friendList;
+    public static void setRequestList(Vector<String> requestList) {
+        UserManager.requestList = requestList;
+    }
+
+    public static Vector<String> getSentList() {
+        return sentList;
+    }
+
+    public static void setSentList(Vector<String> sentList) {
+        UserManager.sentList = sentList;
     }
 
     public Boolean blockUser() {
