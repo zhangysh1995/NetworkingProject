@@ -4,14 +4,12 @@ package Utility;
  * this module handles mail services
  */
 
-import Utility.GPG;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Properties;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.net.PasswordAuthentication;
+import java.util.Date;
+import java.util.Properties;
 
 public class MailHandler {
     private static String myMail;
