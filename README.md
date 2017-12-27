@@ -20,6 +20,12 @@ Please `watch` this repo by clicking the button at upper-right corner of this pa
     - Draw a graph to show your design if possible
     - Any issues to discuss together?
 
+## Dependencies
+*  Build - Gradle 3.? +
+*  Test - Junit 4.11
+*  GPG - Bouncy-gpg 2.0.1
+*  Mail - JavaMail 1.4.5
+
 ## Credits
 
 ## License
