@@ -1,0 +1,11 @@
+language:  java
+
+notifications:
+  slack:
+    on_success: change
+    on_failure: always
+
+  email:
+      - 11310180@mail.sustc.edu.cn
+      - 11410172@mail.sustc.edu.cn
+      - 11410194@mail.sustc.edu.cn

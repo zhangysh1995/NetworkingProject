@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>IM_GUI.SecuredIM</OriginalElement>
+  <nodes>
+    <node x="308.0" y="333.0">DataManager.UserManager</node>
+    <node x="0.0" y="393.0">IM_GUI.ListView.FriendListViewController</node>
+    <node x="414.75" y="0.0">Utility.GPG</node>
+    <node x="124.45833333333326" y="584.0">IM_GUI.Home.HomeController</node>
+    <node x="392.75" y="155.0">Utility.MailHandler</node>
+    <node x="585.0" y="381.5">IM_GUI.SecuredIM</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="DataManager.UserManager" target="Utility.MailHandler">
+      <point x="64.25" y="-100.5" />
+      <point x="0.0" y="64.0" />
+    </edge>
+    <edge source="IM_GUI.Home.HomeController" target="IM_GUI.ListView.FriendListViewController">
+      <point x="-118.87499999999994" y="-124.0" />
+      <point x="164.08333333333331" y="559.0" />
+      <point x="72.0" y="559.0" />
+      <point x="-72.0" y="40.5" />
+    </edge>
+    <edge source="IM_GUI.Home.HomeController" target="DataManager.UserManager">
+      <point x="39.62500000000006" y="-124.0" />
+      <point x="322.5833333333333" y="559.0" />
+      <point x="372.25" y="559.0" />
+      <point x="-64.25" y="100.5" />
+    </edge>
+    <edge source="IM_GUI.SecuredIM" target="Utility.MailHandler">
+      <point x="0.0" y="-52.0" />
+      <point x="688.5" y="308.0" />
+      <point x="572.75" y="308.0" />
+      <point x="72.00000000000003" y="64.0" />
+    </edge>
+    <edge source="Utility.MailHandler" target="Utility.GPG">
+      <point x="2.8421709430404007E-14" y="-64.0" />
+      <point x="0.0" y="52.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="129.0" y="359.5" />
+  <SelectedNodes>
+    <node>DataManager.UserManager</node>
+    <node>IM_GUI.ListView.FriendListViewController</node>
+    <node>Utility.GPG</node>
+    <node>IM_GUI.Home.HomeController</node>
+    <node>Utility.MailHandler</node>
+    <node>IM_GUI.SecuredIM</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

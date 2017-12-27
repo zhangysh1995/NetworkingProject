@@ -1,4 +1,4 @@
-# NetworkingProject
+# NetworkingProject [![Build Status](https://travis-ci.org/zhangysh1995/NetworkingProject.svg?branch=zys-2)](https://travis-ci.org/zhangysh1995/NetworkingProject)
 Group project of Computer Networking 2017 Fall@SUSTech
 
 ## Introduction
@@ -19,6 +19,12 @@ Please `watch` this repo by clicking the button at upper-right corner of this pa
     - Form your own design of the project
     - Draw a graph to show your design if possible
     - Any issues to discuss together?
+
+## Dependencies
+*  Build - Gradle 3.? +
+*  Test - Junit 4.11
+*  GPG - Bouncy-gpg 2.0.1
+*  Mail - JavaMail 1.4.5
 
 ## Credits
 

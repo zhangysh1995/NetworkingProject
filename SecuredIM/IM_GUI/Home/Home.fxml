@@ -49,12 +49,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="Contacts">
             <items>
-              <MenuItem mnemonicParsing="false" text="Add" fx:id="addFriend"/>
+              <MenuItem mnemonicParsing="false" onAction="#addFriend" text="Add" fx:id="addFriend"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Group">
             <items>
-              <MenuItem mnemonicParsing="false" text="New" fx:id="addGroup"/>
+              <MenuItem mnemonicParsing="false" onAction="#newGroup" text="New" fx:id="addGroup"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

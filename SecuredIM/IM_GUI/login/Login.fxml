@@ -17,7 +17,7 @@
            GridPane.columnSpan="2"/>
     <!--Username-->
     <Label text="E-mail" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <TextField GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id = "userEmail"/>
     <!--Lock key-->
     <Label text="Key" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
     <PasswordField GridPane.rowIndex="2" GridPane.columnIndex="1"/>
