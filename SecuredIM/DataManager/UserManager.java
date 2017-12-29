@@ -5,15 +5,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 public class UserManager {
-    private static Vector<String> friendList;
-    private static Vector<String> requestList; // received request to add
-    private static Vector<String> sentList; // sent request
+    private static Vector<String> friendList
+            = new Vector<>(Arrays.asList("Julia", "Ian", "Sue"));
+    private static Vector<String> requestList
+            = new Vector<>(Arrays.asList("test@163.com", "test@126.com"));
+    private static Vector<String> sentList
+            = new Vector<>(2);
 
     public UserManager() {
-        friendList = new Vector<>(2);
+
     }
 
 //    public Vector<String> addFriend(String email) {
@@ -44,11 +48,16 @@ public class UserManager {
         UserManager.sentList = sentList;
     }
 
-    public Boolean blockUser() {
+    public static Boolean addSend(String email) {
+        sentList.add(email);
         return true;
     }
 
-    public Boolean deleteUser() {
+    public static Boolean blockUser() {
+        return true;
+    }
+
+    public static Boolean deleteUser() {
         return true;
     }
 }

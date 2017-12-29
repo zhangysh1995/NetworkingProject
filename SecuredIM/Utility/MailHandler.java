@@ -92,7 +92,7 @@ public class MailHandler {
         msg.setText(text);
         msg.setSentDate(new Date());
 
-        Transport.send(msg);
+//        Transport.send(msg);
         } catch(MessagingException e) {
             System.err.println("Error when constructing the message");
         }

@@ -18,23 +18,27 @@ public class FriendListViewController {
 
     private MailHandler mailHandler;
 
-    private ObservableList<String> names;
-
     public FriendListViewController() {
         mailHandler = new MailHandler();
     }
 
-    public ObservableList<String> getFriendLVC() {
-        if(names == null)
-            names = FXCollections.observableArrayList(
-                    "Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
-
-        return names;
+    public ObservableList<String> getFriendList() {
+        return FXCollections.observableArrayList(UserManager.getFriendList());
     }
+
+    public ObservableList<String> getSentList() {
+        return FXCollections.observableArrayList(UserManager.getSentList());
+    }
+//
+//    public ObservableList<String> getFriendLVC() {
+//
+//    }
 
     @FXML private void addFriend() {
         if(mailHandler.sendRequestMail(email.getText())) {
             email.getScene().getWindow().hide(); // hide addFriend window
-        } else System.err.println("Error when sending message");
+            if (UserManager.addSend(email.getText()))
+                System.err.println("Error: save friend request to list");
+        } else System.err.println("Error: send friend request");
     }
 }
