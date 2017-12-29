@@ -20,4 +20,13 @@ public class BasicMail {
 
         mailHandler.sendRequestMail("zhangys3@mail.sustc.edu.cn");
     }
+
+    @Test
+    public void testRecv() {
+        System.setOut(System.out);
+        MailHandler.setMail("zhangyushao@zhangyushao.site");
+        MailHandler mailHandler = new MailHandler();
+
+        mailHandler.receiveMessage();
+    }
 }

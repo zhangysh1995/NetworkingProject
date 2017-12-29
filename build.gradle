@@ -44,9 +44,14 @@ dependencies {
          test {
              java {
                  srcDir 'Tests'
+
              }
          }
      }
+ }
+
+ test {
+     testLogging.showStandardStreams = true
  }
 
  jar {
