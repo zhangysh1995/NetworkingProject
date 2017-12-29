@@ -29,6 +29,10 @@ public class FriendListViewController {
     public ObservableList<String> getSentList() {
         return FXCollections.observableArrayList(UserManager.getSentList());
     }
+
+//    public ObservableList<String> updateSentList() {
+//        return FXCollections.observableArrayList(UserManager.u)
+//    }
 //
 //    public ObservableList<String> getFriendLVC() {
 //
