@@ -23,7 +23,6 @@ public class BasicMail {
 
     @Test
     public void testRecv() {
-        System.setOut(System.out);
         MailHandler.setMail("zhangyushao@zhangyushao.site");
         MailHandler mailHandler = new MailHandler();
 

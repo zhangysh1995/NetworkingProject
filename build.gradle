@@ -25,9 +25,7 @@ dependencies {
     compile group: 'org.bouncycastle', name: 'bcpg-jdk15on', version: '1.58'
     compile 'name.neuhalfen.projects.crypto.bouncycastle.openpgp:bouncy-gpg:2.+'
     // https://mvnrepository.com/artifact/javax.mail/mail
-    compile 'javax.mail:mail:1.4.5'
-    // https://mvnrepository.com/artifact/com.sun.mail/all
-    // compile 'com.sun.mail:all:1.4.5'
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.0'
 }
 
  sourceSets {
