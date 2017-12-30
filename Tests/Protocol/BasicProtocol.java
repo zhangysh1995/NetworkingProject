@@ -12,7 +12,7 @@ public class BasicProtocol {
     @Test
     public void testA() {
 		// TODO Auto-generated method stub
-		String testpacket = "CYY 1.0\r\n"
+		String testpacket = "CYY 0.1\r\n"
 							+"CYYClient 1.0\r\n"
 							+"GnuPG 2.0\r\n"
 							+"1234\r\n"
