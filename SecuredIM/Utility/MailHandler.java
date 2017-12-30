@@ -23,7 +23,7 @@ public class MailHandler {
     private Properties props;
 
     public MailHandler() {
-        this.props = System.getProperties();;
+        this.props = System.getProperties();
     }
 
     public static void setMail(String mail) {
