@@ -27,7 +27,7 @@ public class GPG {
     }
 
     public static String Encrypt(String text) {
-        return "Encrypted text";
+        return "hello world";
     }
 
     // getter & setters

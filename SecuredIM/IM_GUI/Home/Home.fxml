@@ -15,7 +15,7 @@
         <panes>
           <TitledPane animated="false" prefHeight="260.0" prefWidth="273.0" text="Friends">
                <content>
-                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="friendList"/>
+                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="friendList" onMouseClicked="#newChat"/>
                </content>
             </TitledPane>
             <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Groups">

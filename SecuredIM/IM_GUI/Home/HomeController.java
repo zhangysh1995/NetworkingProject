@@ -1,9 +1,9 @@
 package IM_GUI.Home;
 
 import DataManager.GroupManager;
-import DataManager.UserManager;
 import IM_GUI.ListView.FriendListViewController;
 import IM_GUI.ListView.GroupListViewController;
+import IM_GUI.Chatting.P2PchatController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,21 +32,21 @@ public class HomeController {
     // TODO: BlockedViewController
 
     // delegate to managers
-    private UserManager userManager;
+//    private UserManager userManager;
     private GroupManager groupManager;
 
     @FXML
     public void initialize() {
         friendLVC = new FriendListViewController();
         groupLVC = new GroupListViewController();
-        userManager = new UserManager();
+
         groupManager = new GroupManager();
-        friendList.setItems(friendLVC.getFriendLVC());
+        friendList.setItems(friendLVC.getFriendList());
     }
 
     // TODO: use actual data to replace demo
     @FXML
-    private void addFriend(ActionEvent actionEvent) throws IOException{
+    private void addFriend(ActionEvent actionEvent) throws IOException {
 //        addFriend.setText("pressed");
 //        userManager.addUser();
        newWindow("AddUser.fxml", friendLVC);
@@ -54,11 +55,17 @@ public class HomeController {
     }
 
     @FXML
-    private void newGroup(ActionEvent actionEvent) throws IOException{
+    private void newGroup(ActionEvent actionEvent) throws IOException {
 //        addGroup.setText("pressed");
 //        groupManager.newGroup();
         newWindow("NewGroup.fxml", groupLVC);
 
+    }
+
+    @FXML
+    private void newChat(MouseEvent mouseEvent) throws IOException {
+        P2PchatController pchatController = new P2PchatController(mouseEvent);
+        newWindow("../Chatting/P2Pchat.fxml", pchatController);
     }
 
     private void newWindow(String file, Object controller) throws IOException{
