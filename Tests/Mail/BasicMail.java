@@ -20,8 +20,6 @@ public class BasicMail {
 
         mailHandler.sendRequestMail("zhangys3@mail.sustc.edu.cn");
     }
-<<<<<<< HEAD
-
     @Test
     public void testRecv() {
         MailHandler.setMail("zhangyushao@zhangyushao.site");
@@ -29,6 +27,4 @@ public class BasicMail {
 
         mailHandler.receiveMessage();
     }
-=======
->>>>>>> 55a7ad08d2ae2ea55c4b22bae9d91539e3a7284c
 }
