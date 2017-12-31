@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.Properties;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -19,6 +18,8 @@ import javax.mail.search.AndTerm;
 import javax.mail.search.FlagTerm;
 import javax.mail.search.SearchTerm;
 import javax.mail.search.SubjectTerm;
+
+import Local.Secret; // save my little secrets
 
 public class MailHandler {
     private static String myMail;
@@ -82,7 +83,7 @@ public class MailHandler {
         Session session =  Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(Secret.getEmail(),Secret.getPass);
             }
         });
 
@@ -129,7 +130,7 @@ public class MailHandler {
     private String receive() {
 
         URLName urln = new URLName("imap", myRecvServer, 993,
-                null, username, password);
+                null, Secret.getEmail(), Secret.getPass());
 
         try {
             Store store = getSessionRecv().getStore(urln);
