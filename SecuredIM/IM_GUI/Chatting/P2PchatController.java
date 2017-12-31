@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class P2PchatController extends Controller{
     private MouseEvent mouseEvent;
@@ -33,6 +35,7 @@ public class P2PchatController extends Controller{
     private int seqNum;
     private int sessionId;
 
+    private ExecutorService executor;
     private Thread rthread;
 
     @FXML private Label title;
@@ -78,8 +81,11 @@ public class P2PchatController extends Controller{
     }
 
     private void ReceiveMessage(MailHandler mailHandler){
+        // callable to receive
         this.rthread = new Thread(new ReceivingWork(mailHandler));
-        rthread.run();
+        // asynchronous threading
+        this.executor = Executors.newSingleThreadExecutor();
+        executor.submit(rthread);
     };
 
     @FXML

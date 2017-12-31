@@ -156,7 +156,6 @@ public class MailHandler {
     }
 
     private void printMessage(Message[] messages) {
-        System.out.println(messages.length);
         try{
             for(int i = 0; i < messages.length; i++) {
                 // only process cyy related emails
