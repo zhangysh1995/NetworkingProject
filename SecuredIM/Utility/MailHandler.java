@@ -85,7 +85,7 @@ public class MailHandler {
         Session session =  Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(Secret.getEmail(),Secret.getPass);
+                return new PasswordAuthentication(Secret.getEmail(),Secret.getPass());
             }
         });
 
