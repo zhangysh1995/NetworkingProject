@@ -11,7 +11,11 @@
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutY="2.0" prefHeight="33.0" prefWidth="365.0" text="Label" fx:id="title"/>
+<<<<<<< HEAD
       <ScrollPane layoutY="35.0" prefHeight="250.0" prefWidth="365.0" fx:id="scrollPane">
+=======
+      <ScrollPane layoutY="35.0" prefHeight="250.0" prefWidth="365.0">
+>>>>>>> 55a7ad08d2ae2ea55c4b22bae9d91539e3a7284c
          <content>
             <TextFlow prefHeight="247.0" prefWidth="363.0" fx:id="textLog"/>
          </content>
@@ -25,6 +29,10 @@
             <Button mnemonicParsing="false" text="Button" />
         </items>
       </ToolBar>
+<<<<<<< HEAD
       <TextField layoutY="325.0" prefHeight="76.0" prefWidth="365.0" fx:id="userInput" onKeyPressed="#sendMessage"/>
+=======
+      <TextField layoutY="325.0" prefHeight="76.0" prefWidth="365.0" fx:id="userInput"/>
+>>>>>>> 55a7ad08d2ae2ea55c4b22bae9d91539e3a7284c
    </children>
 </Pane>

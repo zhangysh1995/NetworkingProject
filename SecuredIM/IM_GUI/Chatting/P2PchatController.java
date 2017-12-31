@@ -1,5 +1,6 @@
 package IM_GUI.Chatting;
 
+<<<<<<< HEAD
 import Utility.MailHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +12,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+=======
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+>>>>>>> 55a7ad08d2ae2ea55c4b22bae9d91539e3a7284c
 
 public class P2PchatController {
     private MouseEvent mouseEvent;
@@ -19,6 +27,7 @@ public class P2PchatController {
     private String email;
     private int index;
 
+<<<<<<< HEAD
     private MailHandler mailHandler;
 
     @FXML private Label title;
@@ -28,6 +37,12 @@ public class P2PchatController {
 
     public P2PchatController(MouseEvent mouseEvent) {
         mailHandler = new MailHandler();
+=======
+    @FXML private Label title;
+    @FXML private TextField userInput;
+
+    public P2PchatController(MouseEvent mouseEvent) {
+>>>>>>> 55a7ad08d2ae2ea55c4b22bae9d91539e3a7284c
         this.mouseEvent = mouseEvent;
         this.listView = (ListView) mouseEvent.getSource();
         email = (String) listView.getSelectionModel().getSelectedItem();
@@ -35,6 +50,7 @@ public class P2PchatController {
     }
 
     @FXML
+<<<<<<< HEAD
     public void sendMessage(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER) {
             String input = ":\n" + userInput.getText() + "\n";
@@ -59,4 +75,10 @@ public class P2PchatController {
         textLog.getChildren().add(msg);
         scrollPane.setVvalue(scrollPane.getHmax());
     }
+=======
+    public void initialize() {
+        title.setText("Chatroom: " + email);
+        userInput.setText("Enter here...press `Enter` to send");
+    }
+>>>>>>> 55a7ad08d2ae2ea55c4b22bae9d91539e3a7284c
 }

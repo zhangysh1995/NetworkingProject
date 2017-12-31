@@ -73,6 +73,8 @@ public class MailHandler {
     }
 
     private Boolean send(String toEmail, String text) {
+        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
         props.setProperty("mail.smtp.host","smtp.mxhichina.com");
         props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
         props.setProperty("mail.smtp.socketFactory.fallback", "false");
