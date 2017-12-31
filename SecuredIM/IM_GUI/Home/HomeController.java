@@ -1,5 +1,6 @@
 package IM_GUI.Home;
 
+import IM_GUI.Abstract.Controller;
 import DataManager.GroupManager;
 import IM_GUI.ListView.FriendListViewController;
 import IM_GUI.ListView.GroupListViewController;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HomeController {
+    private int sessionNum;
     // listviews
     @FXML private ListView<String> friendList;
     @FXML private ListView<String> groupList;
@@ -42,7 +44,12 @@ public class HomeController {
 
         groupManager = new GroupManager();
         friendList.setItems(friendLVC.getFriendList());
+
+        this.sessionNum = 0;
     }
+
+    private int getSessionNum() {return this.sessionNum;}
+    private void updateSessionNum() {this.sessionNum++;}
 
     // TODO: use actual data to replace demo
     @FXML
@@ -64,17 +71,25 @@ public class HomeController {
 
     @FXML
     private void newChat(MouseEvent mouseEvent) throws IOException {
-        P2PchatController pchatController = new P2PchatController(mouseEvent);
+        updateSessionNum();
+
+        P2PchatController pchatController = new P2PchatController(mouseEvent, getSessionNum());
         newWindow("../Chatting/P2Pchat.fxml", pchatController);
     }
 
-    private void newWindow(String file, Object controller) throws IOException{
+    private void newWindow(String file, Controller controller) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
         loader.setController(controller);
         Parent mainFrame = loader.load();
         Scene scene = new Scene(mainFrame);
         Stage newStage = new Stage();
 
+        // set default exit behavior
+        newStage.setOnHidden(e -> {
+            controller.shutdown();
+        });
+
+        // show the window
         newStage.setScene(scene);
         newStage.show();
     }

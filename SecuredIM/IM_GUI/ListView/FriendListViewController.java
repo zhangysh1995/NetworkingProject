@@ -1,5 +1,6 @@
 package IM_GUI.ListView;
 
+import IM_GUI.Abstract.Controller;
 import DataManager.User;
 import DataManager.UserManager;
 import Utility.MailHandler;
@@ -11,7 +12,7 @@ import javafx.scene.control.TextField;
 /**
  * Created by KellyZhang on 2017/12/22.
  */
-public class FriendListViewController {
+public class FriendListViewController extends Controller{
     // add new friend
     @FXML private TextField email;
     @FXML private TextField notes;

@@ -68,7 +68,6 @@ public class MailHandler {
     }
 
     public Boolean sendMessage(String toEmail, String text ) {
-        text = GPG.Encrypt(text);
         return send(toEmail, text);
     }
 
@@ -160,6 +159,7 @@ public class MailHandler {
         System.out.println(messages.length);
         try{
             for(int i = 0; i < messages.length; i++) {
+                // only process cyy related emails
                 if(!getSubject(messages[i]).toLowerCase().equals("cyy 0.1"))
                     continue;
                 String content = getMailContent(messages[i]);

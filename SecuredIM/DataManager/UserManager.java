@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.Vector;
 
 public class UserManager {
-    private static Vector<String> friendList
-            = new Vector<>(Arrays.asList("Julia", "Ian", "Sue"));
+    private static  Vector<String> friendList
+            = new Vector<>(Arrays.asList("zhangyushao@zhangyushao.site", "Ian", "Sue"));
     private static Vector<String> requestList
             = new Vector<>(Arrays.asList("test@163.com", "test@126.com"));
     private static Vector<String> sentList
