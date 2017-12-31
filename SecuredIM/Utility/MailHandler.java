@@ -25,7 +25,6 @@ public class MailHandler {
     private static String mySmtpServer = "stmp.mxhichina.com";
     private static String myRecvServer = "imap.mxhichina.com";
     private static String request = "newFriendRequest";
-
     final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
 //    private smtpServerList;
@@ -33,7 +32,7 @@ public class MailHandler {
     private Properties props;
 
     public MailHandler() {
-        this.props = System.getProperties();
+        this.props = System.getProperties();;
     }
 
     public static void setMail(String mail) {
