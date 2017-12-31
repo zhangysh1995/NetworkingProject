@@ -3,6 +3,9 @@ package cyy_IM_protocol;
 import javax.mail.*;
 
 public interface Cyy_factory {
+    static Cyy_factory get_cyyfactory(){
+        return new CYY_PACKET_generator();
+    }
     // first step create message_cyy
 
     /**
@@ -42,7 +45,7 @@ public interface Cyy_factory {
     /**
      *
      * @param raw_packet the original packet coming from internet
-     * @return
+     * @return the IM_capsulation is the packet object
      */
     IM_capsulation packet_parse(String raw_packet);
 }

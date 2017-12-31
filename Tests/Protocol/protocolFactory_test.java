@@ -32,7 +32,7 @@ public class protocolFactory_test {
     @Test
     public void test_packet_gen(){
 
-        Cyy_factory f = new CYY_PACKET_generator();
+        Cyy_factory f = Cyy_factory.get_cyyfactory();
         f.create_messageObj("hello word", "GnuPG 2.0", 1234, 12345566, 12);
         String[] dests = {"luoyq@mail.sustc.edu.cn", "zhangys3@mail.sustc.edu.cn"};
 
@@ -48,7 +48,7 @@ public class protocolFactory_test {
     }
     @Test
     public void test_packet_parse(){
-        Cyy_factory f = new CYY_PACKET_generator();
+        Cyy_factory f = Cyy_factory.get_cyyfactory();
         try {
             decoded = new String(f.packet_generate(f.packet_parse(testpacket)),"UTF-8");
             System.out.print(decoded);
