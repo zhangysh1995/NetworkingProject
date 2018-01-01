@@ -4,22 +4,17 @@ package Utility;
  * this module handles mail services
  */
 
+import Local.Secret;
 import com.sun.mail.imap.IMAPMessage;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
-import javax.mail.search.AndTerm;
 import javax.mail.search.FlagTerm;
-import javax.mail.search.SearchTerm;
-import javax.mail.search.SubjectTerm;
-
-import Local.Secret; // save my little secrets
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
 
 public class MailHandler {
     private static String myMail;
@@ -45,7 +40,7 @@ public class MailHandler {
 
     }
 
-    public static String getMail() throws NullPointerException{
+    public String getMail() throws NullPointerException{
         String mail = "";
 
         try
@@ -159,7 +154,7 @@ public class MailHandler {
         try{
             for(int i = 0; i < messages.length; i++) {
                 // only process cyy related emails
-                if(!getSubject(messages[i]).toLowerCase().equals("cyy 0.1"))
+                if(!getSubject(messages[i]).toLowerCase().equals("cyy/1.0"))
                     continue;
                 String content = getMailContent(messages[i]);
                 System.out.println("=====================>>开始显示邮件内容<<=====================");

@@ -1,16 +1,11 @@
 package DataManager;
 
-import Utility.MailHandler;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-
 import java.util.Arrays;
 import java.util.Vector;
 
 public class UserManager {
     private static  Vector<String> friendList
-            = new Vector<>(Arrays.asList("zhangyushao@zhangyushao.site", "Ian", "Sue"));
+            = new Vector<>(Arrays.asList("zhangyushao@zhangyushao.site", "mac@mail.sustc.edu.cn", "Sue"));
     private static Vector<String> requestList
             = new Vector<>(Arrays.asList("test@163.com", "test@126.com"));
     private static Vector<String> sentList
