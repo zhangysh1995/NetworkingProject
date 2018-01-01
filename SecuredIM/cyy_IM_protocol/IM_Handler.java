@@ -2,6 +2,7 @@ package cyy_IM_protocol;
 
 import DataManager.Group;
 import DataManager.User;
+import Utility.GPG;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map.Entry;
@@ -31,8 +32,11 @@ import java.util.Set;
  */
 public class IM_Handler {
 public static String ACTION_contactInitializing = "CONTACT-Init";
+public static String ACTION_contactAddConfirm = "CONTACT-confirm";
+public static String ACTION_contactAddReject = "CONTACT-reject";
 public static String ACTION_individualSending = "INDIVIDUAL-Send";
 public static String ACTION_groupInitializing = "GROUP-Init";
+public static String ACTION_groupAddConfirm = "GROUP-addConfirm";
 public static String ACTION_groupSending = "GROUP-Send";
 public static String ACTION_groupQuiting = "GROUP-Quit";
 public static String ENCRYPTION_type_base = "GnuPG 2.0";
@@ -124,12 +128,26 @@ public IM_capsulation parse_packet(byte[] raw_packet) throws UnsupportedEncoding
 		for(int i=14;i<lines.length;i++){
 			content = content + lines[i];
 		}
+		content = GPG.Decrypt(content);
+		if(content == null){
+			/**
+			 * how to indicate decrypting failed
+			 */
+			return null;
+		}
 		m.setContent(content);
 	}else {
 		IM_cap.setIndividual_Destination(new User(lines[11]));
 		String content = "";
 		for(int i=13;i<lines.length;i++){
 			content = content + lines[i];
+		}
+		content = GPG.Decrypt(content);
+		if(content == null){
+			/**
+			 * how to indicate decrypting failed
+			 */
+			return null;
 		}
 		m.setContent(content);
 	}
