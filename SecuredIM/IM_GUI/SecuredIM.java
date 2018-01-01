@@ -1,13 +1,14 @@
 package IM_GUI;
 
-import Utility.MailHandler;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -34,17 +35,33 @@ public class SecuredIM extends Application {
     }
 
     @FXML private Button signIn;
-    @FXML  private TextField userEmail;
+    @FXML private Button test;
+    @FXML private TextField userEmail;
+    @FXML private PasswordField emailPass;
+    @FXML private PasswordField gpgPass;
+    @FXML private TextField smtp;
+    @FXML private TextField imap;
+
+
+    @FXML
+    protected void testConnect(ActionEvent actionEvent) {
+//        if(! MailHandler.connectSMTP(userEmail.getText(),
+//                emailPass.getText(), smtp.getText())) showWarning("Connection SMTP failed.");
+
+//        if(! MailHandler.connectIMAP(userEmail.getText(),
+//                emailPass.getText(), imap.getText())) showWarning("Connection IMAP failed.");
+    }
+
+    private void showWarning(String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, text);
+        alert.showAndWait();
+    }
 
     @FXML
     protected void handleLogin(ActionEvent actionEvent) throws Exception {
         Parent mainFrame = FXMLLoader.load(getClass().getResource("Home/Home.fxml"));
         Scene scene = new Scene(mainFrame, 270, 450);
         Stage newStage = new Stage();
-
-        // set user's email address
-        MailHandler.setMail(userEmail.getText());
-        System.out.println("My email: " + userEmail.getText());
 
         // hide login window
         Stage lastStage = (Stage) signIn.getScene().getWindow();
@@ -53,5 +70,11 @@ public class SecuredIM extends Application {
         // show mainframe
         newStage.setScene(scene);
         newStage.show();
+
+        // set user's email address
+//        MailHandler.setMail("zhangyushao@zhangyushao.site");
+//        MailHandler.setPassword(emailPass.getText());
+//        MailHandler.setMySmtpServer(smtp.getText());
+//        MailHandler.setMyImapServer(imap.getText());
     }
 }

@@ -1,15 +1,14 @@
 package Mail;
 
-import org.junit.Test;
 import Utility.MailHandler;
+import org.junit.Test;
 
 public class BasicMail {
+
     @Test
     public void testSend() {
         MailHandler.setMail("zhangyushao@zhangyushao.site");
-        MailHandler mailHandler = new MailHandler();
-
-        mailHandler.sendMessage("zhangys3@mail.sustc.edu.cn", "test");
+        MailHandler.send("zhangys3@mail.sustc.edu.cn", "test");
 
     }
 
@@ -17,14 +16,10 @@ public class BasicMail {
     public void testSendRequest() {
         MailHandler.setMail("zhangyushao@zhangyushao.site");
         MailHandler mailHandler = new MailHandler();
-
-        mailHandler.sendRequestMail("zhangys3@mail.sustc.edu.cn");
     }
+
     @Test
     public void testRecv() {
-        MailHandler.setMail("zhangyushao@zhangyushao.site");
-        MailHandler mailHandler = new MailHandler();
-
-        mailHandler.receiveMessage();
+        MailHandler.receive();
     }
 }
