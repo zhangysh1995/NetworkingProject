@@ -77,7 +77,7 @@ public byte [] generate_packet(IM_capsulation IM_capsulation) {
 			Destination = Destination + e.getKey()+";";
 		}
 	}else {
-		Destination = Destination+ IM_capsulation.getIndividual_Destination();
+		Destination = Destination+ IM_capsulation.getIndividual_Destination().getUser_email();
 	}
 	packet_Generate = packet_Generate + Destination+CRLF;
 	//optional field for group info
