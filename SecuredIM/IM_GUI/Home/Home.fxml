@@ -6,31 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="439.0" prefWidth="273.0"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="IM_GUI.Home.HomeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="IM_GUI.Home.HomeController">
    <children>
-      <Accordion layoutY="64.0" prefHeight="333.0" prefWidth="273.0">
-        <panes>
-          <TitledPane animated="false" prefHeight="260.0" prefWidth="273.0" text="Friends">
-               <content>
-                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="friendList" onMouseClicked="#newChat"/>
-               </content>
-            </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Groups">
-               <content>
-                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="groupList"/>
-               </content>
-            </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Blocked">
-               <content>
-                  <ListView prefHeight="250.0" prefWidth="270.0" fx:id="blockedList"/>
-               </content>
-            </TitledPane>
-        </panes>
-      </Accordion>
-      <MenuBar prefHeight="69.0" prefWidth="270.0">
+      <MenuBar prefHeight="30.0" prefWidth="270.0">
         <menus>
           <Menu mnemonicParsing="false" text="About">
             <items>
@@ -45,24 +23,69 @@
           </Menu>
         </menus>
       </MenuBar>
-      <MenuBar layoutY="397.0" prefHeight="41.0" prefWidth="273.0">
+      <MenuBar layoutY="390.0" prefHeight="30.0" prefWidth="273.0">
         <menus>
           <Menu mnemonicParsing="false" text="Contacts">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#addFriend" text="Add" fx:id="addFriend"/>
+              <MenuItem fx:id="addFriend" mnemonicParsing="false" onAction="#addFriend" text="Add" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Group">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#newGroup" text="New" fx:id="addGroup"/>
+              <MenuItem fx:id="addGroup" mnemonicParsing="false" onAction="#newGroup" text="New" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" fx:id="About"/>
+              <MenuItem fx:id="About" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
+      <TabPane layoutY="30.0" prefHeight="360.0" prefWidth="270.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Friends">
+               <content>
+                  <Accordion prefHeight="333.0" prefWidth="273.0">
+                    <panes>
+                      <TitledPane animated="false" prefHeight="260.0" prefWidth="273.0" text="Friends">
+                           <content>
+                              <ListView fx:id="friendList" onMouseClicked="#onClickFriendList" prefHeight="250.0" prefWidth="270.0" />
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="260.0" prefWidth="273.0" text="Groups">
+                           <content>
+                              <ListView fx:id="groupList" prefHeight="250.0" prefWidth="270.0" />
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="237.0" prefWidth="272.0" text="Blocked">
+                           <content>
+                              <ListView fx:id="blockedList" prefHeight="250.0" prefWidth="270.0" />
+                           </content>
+                        </TitledPane>
+                    </panes>
+                  </Accordion>
+               </content>
+          </Tab>
+          <Tab text="New">
+               <content>
+                  <Accordion>
+                    <panes>
+                        <TitledPane animated="false" prefHeight="260.0" prefWidth="273.0" text="Requests">
+                           <content>
+                              <ListView fx:id="requestList" onMouseClicked="#onClickRequestList" prefHeight="250.0" prefWidth="270.0" />
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Pending">
+                           <content>
+                              <ListView fx:id="sentList" prefHeight="200.0" prefWidth="200.0" />
+                           </content>
+                        </TitledPane>
+                    </panes>
+                  </Accordion>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </Pane>

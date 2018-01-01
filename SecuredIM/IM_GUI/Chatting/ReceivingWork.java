@@ -17,7 +17,7 @@ public class ReceivingWork implements Runnable{
         try {
             do{
                 mailHandler.receiveMessage();
-                Thread.sleep(1000L);
+                this.wait(1000L);
             } while(true);
         } catch (InterruptedException e) {
             e.printStackTrace();

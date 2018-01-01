@@ -1,10 +1,10 @@
 package IM_GUI.Home;
 
-import IM_GUI.Abstract.Controller;
 import DataManager.GroupManager;
+import IM_GUI.Abstract.Controller;
+import IM_GUI.Chatting.P2PchatController;
 import IM_GUI.ListView.FriendListViewController;
 import IM_GUI.ListView.GroupListViewController;
-import IM_GUI.Chatting.P2PchatController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,16 +12,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class HomeController {
+public class HomeController extends Controller{
     private int sessionNum;
     // listviews
     @FXML private ListView<String> friendList;
     @FXML private ListView<String> groupList;
+    @FXML private ListView<String> requestList;
+    @FXML private ListView<String> sentList;
     @FXML private ListView<String> blockedList;
 
     // menu items
@@ -31,11 +35,12 @@ public class HomeController {
     // view controllers
     private FriendListViewController friendLVC;
     private GroupListViewController groupLVC;
-    // TODO: BlockedViewController
 
     // delegate to managers
 //    private UserManager userManager;
     private GroupManager groupManager;
+
+    private ConcurrentHashMap<String, Controller> controllerMap;
 
     @FXML
     public void initialize() {
@@ -44,37 +49,96 @@ public class HomeController {
 
         groupManager = new GroupManager();
         friendList.setItems(friendLVC.getFriendList());
+        requestList.setItems(friendLVC.getRequestList());
+        sentList.setItems(friendLVC.getSentList());
+        blockedList.setItems(friendLVC.getBlockedList());
 
         this.sessionNum = 0;
+
+        // prepare to receive message
+        controllerMap = new ConcurrentHashMap<>(3);
+        controllerMap.put("home", this);
+        // call your thread here
+
     }
 
     private int getSessionNum() {return this.sessionNum;}
     private void updateSessionNum() {this.sessionNum++;}
 
-    // TODO: use actual data to replace demo
     @FXML
     private void addFriend(ActionEvent actionEvent) throws IOException {
-//        addFriend.setText("pressed");
-//        userManager.addUser();
        newWindow("AddUser.fxml", friendLVC);
-//       userManager.addFriend()
 
     }
 
     @FXML
     private void newGroup(ActionEvent actionEvent) throws IOException {
-//        addGroup.setText("pressed");
-//        groupManager.newGroup();
         newWindow("NewGroup.fxml", groupLVC);
 
     }
 
     @FXML
-    private void newChat(MouseEvent mouseEvent) throws IOException {
-        updateSessionNum();
+    private void onClickFriendList(MouseEvent mouseEvent) throws IOException {
+        if(mouseEvent.getButton() == MouseButton.PRIMARY){
+            if(mouseEvent.getClickCount() == 2) {
+                updateSessionNum();
 
-        P2PchatController pchatController = new P2PchatController(mouseEvent, getSessionNum());
-        newWindow("../Chatting/P2Pchat.fxml", pchatController);
+                P2PchatController pchatController = new P2PchatController(mouseEvent, getSessionNum());
+                newWindow("../Chatting/P2Pchat.fxml", pchatController);
+            }
+
+        } else if(mouseEvent.getClickCount() == 2) {
+            // block friend
+            int index = getIndex(mouseEvent);
+            if(friendLVC.blockUser(index)) {
+                System.out.println("Blocked: " + index);
+                friendList.setItems(friendLVC.getFriendList());
+                blockedList.setItems(friendLVC.getBlockedList());
+            }
+            // else error
+        } else if(mouseEvent.getClickCount() == 3) {
+            int index = getIndex(mouseEvent);
+            if(friendLVC.deleteFriend(index)) {
+                System.out.println("Deleted: " + index);
+                friendList.setItems(friendLVC.getFriendList());
+            }
+        }
+    }
+
+    @FXML
+    public void onClickRequestList(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton() == MouseButton.PRIMARY) {
+            if(mouseEvent.getClickCount() == 2) {
+                int index = getIndex(mouseEvent);
+                if(friendLVC.acceptRequest(index)) {
+                    System.out.println("Accepted request: " + index);
+                    friendList.setItems(friendLVC.getFriendList());
+                    requestList.setItems(friendLVC.getRequestList());
+                }
+            }
+        } else if(mouseEvent.getClickCount() == 2) {
+            int index = getIndex(mouseEvent);
+            if(friendLVC.deleteRequest(index)) {
+                System.out.println("Delete request: " + index);
+                requestList.setItems(friendLVC.getRequestList());
+            }
+        }
+    }
+
+    // add new friend request to list
+    public Boolean pushNewRequest(String email) {
+        if(friendLVC.addRequest(email)) {
+            requestList.setItems(friendLVC.getRequestList());
+            return true;
+        }
+
+        else return false;
+    }
+
+    private int getIndex(MouseEvent mouseEvent) {
+        ListView listView = (ListView) mouseEvent.getSource();
+        String email = (String) listView.getSelectionModel().getSelectedItem();
+        return listView.getSelectionModel().getSelectedIndex();
     }
 
     private void newWindow(String file, Controller controller) throws IOException{
