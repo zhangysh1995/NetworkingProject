@@ -23,6 +23,7 @@ public class CYY_PACKET_generator implements Cyy_factory {
      * @param session_id      int: the id of session that this message belong to
      * @return Message_cyy for upper layer
      */
+
     @Override
     public Message_cyy create_messageObj(String raw_text, String Encryption_type, int Sequence_number, long timeStamp, int session_id) {
         Message_ID msg_id = new Message_ID(Sequence_number, timeStamp, session_id);
