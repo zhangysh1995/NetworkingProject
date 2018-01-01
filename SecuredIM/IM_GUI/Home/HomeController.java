@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -36,8 +37,10 @@ public class HomeController extends Controller{
     private FriendListViewController friendLVC;
     private GroupListViewController groupLVC;
 
-    // delegate to managers
-//    private UserManager userManager;
+    // for adding new friend
+    @FXML private TextField email;
+    @FXML private TextField notes;
+
     private GroupManager groupManager;
 
     private ConcurrentHashMap<String, Controller> controllerMap;
@@ -67,8 +70,15 @@ public class HomeController extends Controller{
 
     @FXML
     private void addFriend(ActionEvent actionEvent) throws IOException {
-       newWindow("AddUser.fxml", friendLVC);
+       newWindow("AddUser.fxml", this);
+    }
 
+    @FXML
+    private void sentFriendRequest(ActionEvent actionEvent) {
+        if(friendLVC.addFriend(email.getText())) {
+            sentList.setItems(friendLVC.getSentList());
+            email.getScene().getWindow().hide(); // hide addFriend window
+        }
     }
 
     @FXML

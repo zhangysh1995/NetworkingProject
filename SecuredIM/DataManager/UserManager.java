@@ -1,5 +1,10 @@
 package DataManager;
 
+import Utility.MailHandler;
+import cyy_IM_protocol.Cyy_factory;
+import cyy_IM_protocol.IM_Handler;
+import cyy_IM_protocol.IM_capsulation;
+
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -57,7 +62,19 @@ public class UserManager {
 
     public static Boolean acceptRequest(int index) {
         String user = getRequestList().remove(index);
-        return user == null? false : addFriend(user);
+        Cyy_factory cyy_packet_generator = Cyy_factory.get_cyyfactory();
+
+        cyy_packet_generator.create_messageObj("",
+                "GnuPG 2.0", -1, System.currentTimeMillis(), -1);
+
+        IM_capsulation cap = cyy_packet_generator.capsulate("CYYClient 1.0",
+                IM_Handler.ACTION_contactInitializing, "SMTP",
+                MailHandler.getMail(), user);
+        String msg = new String(cyy_packet_generator.packet_generate(cap));
+
+        if(user != null && MailHandler.send(user, msg)) {
+            return addFriend(user);
+        } else return false;
     }
 
     public static Boolean deleteRequest(int index) {

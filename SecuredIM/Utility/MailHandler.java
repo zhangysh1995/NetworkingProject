@@ -22,25 +22,21 @@ public class MailHandler {
     private static String myRecvServer = "imap.mxhichina.com";
     private static String request = "newFriendRequest";
 
-    final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+    private final static String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
 //    private smtpServerList;
 
-    private Properties props;
-
-    public MailHandler() {
-        this.props = System.getProperties();;
-    }
+    private static Properties props = System.getProperties();
 
     public static void setMail(String mail) {
         myMail = mail;
     }
 
-    private void setMySmtpServert() {
+    public static void setMySmtpServert() {
 
     }
 
-    public String getMail() throws NullPointerException{
+    public static String getMail() throws NullPointerException{
         String mail = "";
 
         try
@@ -58,15 +54,7 @@ public class MailHandler {
         return mail;
     }
 
-    public Boolean sendRequestMail(String toEmail) {
-        return send(toEmail, request);
-    }
-
-    public Boolean sendMessage(String toEmail, String text ) {
-        return send(toEmail, text);
-    }
-
-    private Boolean send(String toEmail, String text) {
+    public static Boolean send(String toEmail, String text) {
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
         props.setProperty("mail.smtp.host","smtp.mxhichina.com");
@@ -103,16 +91,7 @@ public class MailHandler {
         return true;
     }
 
-    public Boolean receiveRequestMail() {
-        return true;
-    }
-
-    public Boolean receiveMessage() {
-        receive();
-        return true;
-    }
-
-    private Session getSessionRecv() {
+    private static Session getSessionRecv() {
         Properties props = System.getProperties();
         props.setProperty("mail.imap.host", myRecvServer);
         props.setProperty("mail.imap.auth", "true");
@@ -123,7 +102,7 @@ public class MailHandler {
         return Session.getDefaultInstance(props, null);
     }
 
-    private String receive() {
+    public static String receive() {
 
         URLName urln = new URLName("imap", myRecvServer, 993,
                 null, Secret.getEmail(), Secret.getPass());
@@ -150,7 +129,7 @@ public class MailHandler {
         return "";
     }
 
-    private void printMessage(Message[] messages) {
+    private static void printMessage(Message[] messages) {
         try{
             for(int i = 0; i < messages.length; i++) {
                 // only process cyy related emails
@@ -171,7 +150,7 @@ public class MailHandler {
         }
     }
 
-    private String getMailContent(Part part) throws Exception {
+    private static String getMailContent(Part part) throws Exception {
         StringBuilder bodytext = new StringBuilder();//存放邮件内容
         //判断邮件类型,不同类型操作不同
         if (part.isMimeType("text/plain")) {
@@ -190,7 +169,7 @@ public class MailHandler {
         return bodytext.toString();
     }
 
-    private String getSubject(Message message) throws Exception {
+    private static String getSubject(Message message) throws Exception {
         String subject = "";
         if(message.getSubject() != null){
             subject = MimeUtility.decodeText(message.getSubject());// 将邮件主题解码
@@ -198,7 +177,7 @@ public class MailHandler {
         return subject;
     }
 
-    private String getFrom(Message message) throws Exception {
+    private static String getFrom(Message message) throws Exception {
         InternetAddress[] address = (InternetAddress[]) message.getFrom();
         String from = address[0].getAddress();
         if (from == null){
@@ -207,7 +186,7 @@ public class MailHandler {
         return from;
     }
 
-    private boolean isContainAttach(Part part) throws Exception {
+    private static boolean isContainAttach(Part part) throws Exception {
         boolean attachflag = false;
         if (part.isMimeType("multipart/*")) {
             Multipart mp = (Multipart) part.getContent();

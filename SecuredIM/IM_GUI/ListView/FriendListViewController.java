@@ -8,22 +8,12 @@ import cyy_IM_protocol.IM_Handler;
 import cyy_IM_protocol.IM_capsulation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 
 /**
  * Created by KellyZhang on 2017/12/22.
  */
 public class FriendListViewController extends Controller{
     // add new friend
-    @FXML private TextField email;
-    @FXML private TextField notes;
-
-    private MailHandler mailHandler;
-
-    public FriendListViewController() {
-        mailHandler = new MailHandler();
-    }
 
     public ObservableList<String> getFriendList() {
         return FXCollections.observableArrayList(UserManager.getFriendList());
@@ -39,7 +29,7 @@ public class FriendListViewController extends Controller{
 
     public ObservableList<String> getRequestList() {return FXCollections.observableList(UserManager.getRequestList()); }
 
-    @FXML private void addFriend() {
+    public Boolean addFriend(String email) {
         Cyy_factory cyy_packet_generator = Cyy_factory.get_cyyfactory();
 
         cyy_packet_generator.create_messageObj("",
@@ -47,15 +37,15 @@ public class FriendListViewController extends Controller{
 
         IM_capsulation cap = cyy_packet_generator.capsulate("CYYClient 1.0",
                 IM_Handler.ACTION_contactInitializing, "SMTP",
-                mailHandler.getMail(), email.getText());
+                MailHandler.getMail(), email);
 
         String msg = new String(cyy_packet_generator.packet_generate(cap));
 
-        if(mailHandler.sendRequestMail(msg)) {
-            email.getScene().getWindow().hide(); // hide addFriend window
-            if (UserManager.addSend(email.getText()))
-                System.err.println("Error: save friend request to list");
+        if(MailHandler.send(email,msg)) {
+
         } else System.err.println("Error: send friend request");
+
+        return UserManager.addSend(email);
     }
 
     public Boolean blockUser(int index) {

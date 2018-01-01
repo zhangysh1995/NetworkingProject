@@ -28,7 +28,6 @@ public class P2PchatController extends Controller{
     private String email;
     private int index;
 
-    private MailHandler mailHandler;
     private CYY_PACKET_generator cyy_packet_generator;
 
     private int seqNum;
@@ -43,7 +42,6 @@ public class P2PchatController extends Controller{
     @FXML private TextFlow textLog;
 
     public P2PchatController(MouseEvent mouseEvent, int sessionId) {
-        this.mailHandler = new MailHandler();
         this.mouseEvent = mouseEvent;
         this.listView = (ListView) mouseEvent.getSource();
         this.email = (String) listView.getSelectionModel().getSelectedItem();
@@ -52,8 +50,6 @@ public class P2PchatController extends Controller{
         this.seqNum = 0;
         this.sessionId = sessionId;
         this.cyy_packet_generator = new CYY_PACKET_generator();
-
-        ReceiveMessage(this.mailHandler);
     }
 
     private int getSessionId() {return this.sessionId;}
@@ -73,7 +69,7 @@ public class P2PchatController extends Controller{
 
             IM_capsulation cap = cyy_packet_generator.capsulate("CYYClient 1.0",
                     IM_Handler.ACTION_individualSending, "IMAP",
-                    "zhangyushao@zhangyushao.site", mailHandler.getMail());
+                    "zhangyushao@zhangyushao.site", MailHandler.getMail());
 
             try {
                 String content = new String(cyy_packet_generator.packet_generate(cap), "UTF-8");
@@ -85,14 +81,14 @@ public class P2PchatController extends Controller{
 
             // local update
             updateSeqNum();
-            Text msg = new Text(mailHandler.getMail() + input);
+            Text msg = new Text(MailHandler.getMail() + input);
             showNewMessage(msg);
         }
     }
 
-    private void ReceiveMessage(MailHandler mailHandler){
+    private void ReceiveMessage(){
         // callable to receive
-        this.rthread = new Thread(new ReceivingWork(mailHandler, new CYY_PACKET_generator()));
+        this.rthread = new Thread(new ReceivingWork(new CYY_PACKET_generator()));
         // asynchronous threading
         this.executor = Executors.newSingleThreadExecutor();
         executor.submit(rthread);
