@@ -98,6 +98,15 @@ public class P2PchatController extends Controller{
         executor.submit(rthread);
     };
 
+    @Override
+    public Boolean pushNewMsg(String msg) {
+        String text = this.email + ":\n" + msg + "\n";
+        Text line = new Text(text);
+        showNewMessage(line);
+        return true;
+    }
+
+    // life-cycle
     @FXML
     public void initialize() {
         title.setText("Chatroom: " + email);
