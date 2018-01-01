@@ -92,7 +92,7 @@ public class P2PchatController extends Controller{
 
     private void ReceiveMessage(MailHandler mailHandler){
         // callable to receive
-        this.rthread = new Thread(new ReceivingWork(mailHandler));
+        this.rthread = new Thread(new ReceivingWork(mailHandler, new CYY_PACKET_generator()));
         // asynchronous threading
         this.executor = Executors.newSingleThreadExecutor();
         executor.submit(rthread);

@@ -1,11 +1,14 @@
 package IM_GUI.Chatting;
 
 import Utility.MailHandler;
+import cyy_IM_protocol.CYY_PACKET_generator;
 
 public class ReceivingWork implements Runnable{
     private MailHandler mailHandler;
+    private CYY_PACKET_generator cyy_packet_generator;
 
-    public ReceivingWork(MailHandler mailHandler) {
+    public ReceivingWork(MailHandler mailHandler, CYY_PACKET_generator cyy_packet_generator) {
+        this.cyy_packet_generator = cyy_packet_generator;
         this.mailHandler = mailHandler;
     }
 
@@ -14,7 +17,7 @@ public class ReceivingWork implements Runnable{
         try {
             do{
                 mailHandler.receiveMessage();
-                Thread.sleep(10000L);
+                Thread.sleep(1000L);
             } while(true);
         } catch (InterruptedException e) {
             e.printStackTrace();
