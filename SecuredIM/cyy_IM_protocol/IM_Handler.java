@@ -70,6 +70,7 @@ public byte [] generate_packet(IM_capsulation IM_capsulation) {
 	packet_Generate = packet_Generate + IM_capsulation.getCheck_sum()+CRLF;
 	//Destination
 	String Destination = "";
+
 	if(IM_capsulation.getGroup_size()>0) {
 		Group g = IM_capsulation.getGroup_Destination();
 		Set<Entry<String, User>> set = g.getSet();
