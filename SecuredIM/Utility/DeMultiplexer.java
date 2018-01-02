@@ -1,8 +1,6 @@
 package Utility;
 
-import DataManager.Group;
 import IM_GUI.Abstract.Controller;
-import cyy_IM_protocol.Cyy_factory;
 
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,13 +33,17 @@ public class DeMultiplexer implements Runnable{
     public void run(){
         while(true){
             Vector<String> result = MailHandler.receive();
-            for(String content: result){
-                Pushexecutor worker = new Pushexecutor(this.Group_session_list,this.Individual_session_list, content);
-                this.executor.submit(worker);
+            for(String r : result) {
+                System.out.println(r);
             }
-            this.executor.shutdown();
+            for(String content: result){
+//                Pushexecutor worker = new Pushexecutor();
+                Thread pushThread = new Thread(new Pushexecutor(this.Group_session_list,this.Individual_session_list, content));
+                this.executor.submit(pushThread);
+            }
+//            this.executor.shutdown();
             try {
-                this.wait(1000L);
+                this.wait(3000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

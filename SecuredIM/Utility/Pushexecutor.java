@@ -34,8 +34,11 @@ public class Pushexecutor implements Runnable {
     }
     @Override
     public void run() {
+//        System.out.println(this);
         Cyy_factory factory = Cyy_factory.get_cyyfactory();
+//        System.out.println("Raw :" + raw_content);
         IM_capsulation cap = factory.packet_parse(raw_content);
+        System.out.println("\nSource mail: " + cap.getSourceEmail());
         Controller controller = null;
         if(cap.getGroup_size()>1){
             /**
@@ -62,6 +65,8 @@ public class Pushexecutor implements Runnable {
             if(action.equals(IM_Handler.ACTION_contactInitializing)){
                 HomeController homeController = (HomeController) this.Individual_session_list.get("homecontroller");
                 homeController.pushNewRequest(cap.getSourceEmail());
+                System.out.println(cap.getSourceEmail());
+
             }else if(action.equals(IM_Handler.ACTION_contactAddConfirm)){
                 /**
                  * confirm is postponed?

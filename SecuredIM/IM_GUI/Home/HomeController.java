@@ -151,6 +151,7 @@ public class HomeController extends Controller{
 
     // add new friend request to list
     public Boolean pushNewRequest(String email) {
+        System.out.println("Received requests: " +email);
         if(friendLVC.addRequest(email)) {
             requestList.setItems(friendLVC.getRequestList());
             return true;

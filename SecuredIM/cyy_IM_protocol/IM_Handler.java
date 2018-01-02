@@ -2,7 +2,6 @@ package cyy_IM_protocol;
 
 import DataManager.Group;
 import DataManager.User;
-import Utility.GPG;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map.Entry;
@@ -128,7 +127,7 @@ public IM_capsulation parse_packet(byte[] raw_packet) throws UnsupportedEncoding
 		for(int i=14;i<lines.length;i++){
 			content = content + lines[i];
 		}
-		content = GPG.Decrypt(content);
+//		content = GPG.Decrypt(content);
 		if(content == null){
 			/**
 			 * how to indicate decrypting failed
@@ -142,7 +141,7 @@ public IM_capsulation parse_packet(byte[] raw_packet) throws UnsupportedEncoding
 		for(int i=13;i<lines.length;i++){
 			content = content + lines[i];
 		}
-		content = GPG.Decrypt(content);
+//		content = GPG.Decrypt(content);
 		if(content == null){
 			/**
 			 * how to indicate decrypting failed
