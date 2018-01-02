@@ -45,7 +45,7 @@ public class Pushexecutor implements Runnable {
             int group_id = group.getGroup_ID();
             String action = cap.getAction_type();
             if(action.equals(IM_Handler.ACTION_groupInitializing)){
-
+                    HomeController homeController = (HomeController)this.Group_session_list.get(-1);
             }else if(action.equals(IM_Handler.ACTION_groupAddConfirm)){
 
             }else if(action.equals(IM_Handler.ACTION_groupSending)){
@@ -66,6 +66,11 @@ public class Pushexecutor implements Runnable {
                 /**
                  * confirm is postponed?
                  */
+                HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
+                homeController.pushNewRequest(cap.getSourceEmail());
+            }else if(action.equals(IM_Handler.ACTION_contactAddConfirm)){
+                HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
+                homeController.pushNewConfirm(cap.getSourceEmail());
             }else if(action.equals(IM_Handler.ACTION_individualSending)){
                 controller = this.Individual_session_list.get(cap.getSourceEmail());
                 controller.pushNewMsg(cap.getMessageCyy().getContent());
