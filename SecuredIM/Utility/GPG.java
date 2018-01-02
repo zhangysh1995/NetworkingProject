@@ -61,8 +61,8 @@ public class GPG {
 
     public static String Decrypt(String text) {
         //return "Decrypted text";
-        File PublicKeyRing = new File("/resource/pubring.gpg");
-        File SecretKeyRing = new File("/resource/secring.gpg");
+        File PublicKeyRing = new File("dummy.pkr");
+        File SecretKeyRing = new File("dummy.skr");
         final KeyringConfig keyringConfig = KeyringConfigs
                 .withKeyRingsFromFiles(
                         PublicKeyRing,
@@ -94,8 +94,8 @@ public class GPG {
 
     public static String Encrypt(String text, String src, String dest, String password) {
         //return "hello world";
-        File PublicKeyRing = new File("/resource/pubring.gpg");
-        File SecretKeyRing = new File("/resource/secring.gpg");
+        File PublicKeyRing = new File("dummy.pkr");
+        File SecretKeyRing = new File("dummy.skr");
 
         final KeyringConfig keyringConfig = KeyringConfigs
                 .withKeyRingsFromFiles(
