@@ -1,7 +1,9 @@
 package Protocol;
 
 import Utility.Pushexecutor;
+import cyy_IM_protocol.Cyy_factory;
 import cyy_IM_protocol.IM_Handler;
+import cyy_IM_protocol.IM_capsulation;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutorService;
@@ -9,7 +11,7 @@ import java.util.concurrent.Executors;
 
 public class DemultiplexerTest {
     // this could not be parsed correctly
-    String packet = "success\r\n" +
+    String packet =
             "CYY 0.1\r\n" +
             "CYYClient 1.0\r\n" +
             "GnuPG 2.0\r\n" +
@@ -45,7 +47,13 @@ public class DemultiplexerTest {
     @Test
     public void testPushExecutor() {
             ExecutorService executor = Executors.newSingleThreadExecutor();
-            Thread pushThread = new Thread(new Pushexecutor(testpacket));
+//            Pushexecutor p = new Pushexecutor(testpacket);
+//        Cyy_factory f = Cyy_factory.get_cyyfactory();
+//        IM_capsulation cap = f.packet_parse(packet);
+//        System.out.println("\nSource mail: " + cap.getSourceEmail());
+
+          //  p.run();
+            Thread pushThread = new Thread(new Pushexecutor(packet));
             executor.submit(pushThread);
     }
 }

@@ -32,11 +32,13 @@ public class protocolFactory_test {
 
         Cyy_factory f = Cyy_factory.get_cyyfactory();
         f.create_messageObj("hello word", "GnuPG 2.0", 1234, 12345566, 12);
-        String[] dests = {"luoyq@mail.sustc.edu.cn", "zhangys3@mail.sustc.edu.cn"};
+        String[] dests = {"luoyq@mail.sustc.edu.cn"};
 
-        IM_capsulation cap = f.capsulate("CYYClient 1.0",IM_Handler.ACTION_groupSending, "IMAP","mac@mail.sustc.edu.cn",dests, 1);
+        IM_capsulation cap = f.capsulate("CYYClient 1.0",IM_Handler.ACTION_contactInitializing, "IMAP",
+                "mac@mail.sustc.edu.cn","luoyq@mail.sustc.edu.cn");
         try {
             generate = new String(f.packet_generate(cap),"UTF-8");
+            System.out.print(generate);
             assert(generate.equals(testpacket));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -46,22 +48,6 @@ public class protocolFactory_test {
     }
     @Test
     public void test_packet_parse(){
-        Cyy_factory f = Cyy_factory.get_cyyfactory();
-        try {
-            decoded = new String(f.packet_generate(f.packet_parse(testpacket)),"UTF-8");
-            IM_capsulation cap = f.packet_parse(testpacket);
-            System.out.println(cap.getSourceEmail());
-//            System.out.print(decoded);
-//            System.out.println(decoded.split(IM_Handler.CRLF).length);
-//            System.out.println("Source mail: " + decoded);
-//            assert(decoded.equals(testpacket));
-            String test = IM_Handler.CRLF+IM_Handler.CRLF+IM_Handler.CRLF+IM_Handler.CRLF;
-            //System.out.println(decoded);
-//            System.out.println(test.split(IM_Handler.CRLF).length);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-//        assert(decoded.equals(testpacket));
 
     }
 }

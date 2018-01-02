@@ -10,18 +10,18 @@ import java.util.Set;
  * Sample protocol packet
  * 
  * [0]CYY 1.0\r\n # fill in IMAP as Title <Hard coding>
- * [1]User-agent: CYYClient 1.0\r\n <Input>
- * [2]Encryption: GnuPG 2.0\r\n <Input>
- * [3]Sequence-number: 1234	<Input>
- * [4]Time-stamp: 12345566\r\n <Input>
- * [5]Action-type: Group send\r\n <Input>
- * [6]Mail-protocol: IMAP\r\n <Input>
- * [7]Length: 1\r\n <Calculate>
- * [8]Source: mac@mail.sustc.edu.cn\r\n <Calculate>
- * [9]Group-Size:2\r\n <Calculate>
- * [10]check-sum: 2132\r\n <Calculate>
- * [11]Destination: luoyq@mail.sustc.edu.cn;zhangys3@mail.sustc.edu.cn;\r\n <Input>
- * [12]Options:1\r\n <Input>
+ * [1]User-agent: CYYClient 1.0\r\n <Input>*
+ * [2]Encryption: GnuPG 2.0\r\n <Input>*
+ * [3]Sequence-number: 1234	<Input>*
+ * [4]Time-stamp: 12345566\r\n <Input>*
+ * [5]Action-type: Group send\r\n <Input>*
+ * [6]Mail-protocol: IMAP\r\n <Input>*
+ * [7]Length: 1\r\n <Calculate>*
+ * [8]Source: mac@mail.sustc.edu.cn\r\n <Calculate>*
+ * [9]Group-Size:2\r\n <Calculate>*
+ * [10]check-sum: 2132\r\n <Calculate>*
+ * [11]Destination: luoyq@mail.sustc.edu.cn;zhangys3@mail.sustc.edu.cn;\r\n <Input>*
+ * [12]Options:1\r\n <Input>*
  * [13/12]\r\n
  * [14/13]^%&*^F^UTF*
  * [15/14]\r\n
@@ -112,7 +112,7 @@ public IM_capsulation parse_packet(byte[] raw_packet) throws UnsupportedEncoding
 	User source;
 	IM_capsulation IM_cap;
 	if(headers_check(lines)) {
-	ID = new Message_ID(Integer.parseInt(lines[3]), Integer.parseInt(lines[4]));
+	ID = new Message_ID(Integer.parseInt(lines[3]), Long.parseLong(lines[4]));
 	source = new User(lines[8]);
 	m = new Message_cyy(ID, lines[2], Integer.parseInt(lines[7]));
 	IM_cap =new IM_capsulation(m,lines[1],lines[5], lines[10],lines[6]);

@@ -59,15 +59,15 @@ public class GPG {
 
     }
 
-    public static String Decrypt(String text) {
+    public static String Decrypt(String text, String password) {
         //return "Decrypted text";
-        File PublicKeyRing = new File("dummy.pkr");
-        File SecretKeyRing = new File("dummy.skr");
+        File PublicKeyRing = new File("a.gpg");
+        File SecretKeyRing = new File("a.gpg");
         final KeyringConfig keyringConfig = KeyringConfigs
                 .withKeyRingsFromFiles(
                         PublicKeyRing,
                         SecretKeyRing,
-                        KeyringConfigCallbacks.withPassword("s3cr3t"));
+                        KeyringConfigCallbacks.withPassword(password));
 
         try (
                 final InputStream cipherTextStream = new ByteArrayInputStream(text.getBytes());
@@ -94,8 +94,8 @@ public class GPG {
 
     public static String Encrypt(String text, String src, String dest, String password) {
         //return "hello world";
-        File PublicKeyRing = new File("dummy.pkr");
-        File SecretKeyRing = new File("dummy.skr");
+        File PublicKeyRing = new File("a.gpg");
+        File SecretKeyRing = new File("a.gpg");
 
         final KeyringConfig keyringConfig = KeyringConfigs
                 .withKeyRingsFromFiles(

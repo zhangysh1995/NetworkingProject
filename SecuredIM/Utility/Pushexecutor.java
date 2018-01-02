@@ -43,7 +43,7 @@ public class Pushexecutor implements Runnable {
         IM_capsulation cap = factory.packet_parse(raw_content);
         System.out.println("\nSource mail: " + cap.getSourceEmail());
         Controller controller = null;
-        if(cap.getGroup_size()>1){
+        if(cap.getGroup_size()>0){
             /**
              * this is a group destination
              */

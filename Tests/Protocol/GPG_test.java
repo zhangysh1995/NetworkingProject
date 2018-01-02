@@ -10,7 +10,7 @@ public class GPG_test {
         String encryted = GPG.Encrypt("hello world","mac@mail.sustc.edu.cn","mac@mail.sustc.edu.cn","123456");
         System.out.println(encryted);
 
-        System.out.println(GPG.Decrypt(encryted));
+        //System.out.println(GPG.Decrypt(encryted));
 
     }
 }
