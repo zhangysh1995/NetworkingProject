@@ -32,6 +32,9 @@ public class Pushexecutor implements Runnable {
         this.Individual_session_list = Individual_session_list;
         this.raw_content = protocolpacket;
     }
+
+    public Pushexecutor(String packet){ this.raw_content = packet; };
+
     @Override
     public void run() {
 //        System.out.println(this);
