@@ -48,6 +48,10 @@ public class FriendListViewController extends Controller{
         return UserManager.addSend(email);
     }
 
+    public Boolean sentAccepted(String email) {
+        return UserManager.sentUpdate(email);
+    }
+
     public Boolean blockUser(int index) {
         return UserManager.blockUser(index);
     }

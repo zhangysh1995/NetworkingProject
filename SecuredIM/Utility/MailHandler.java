@@ -4,7 +4,6 @@ package Utility;
  * this module handles mail services
  */
 
-import Local.Secret;
 import com.sun.mail.imap.IMAPMessage;
 
 import javax.mail.*;
@@ -14,14 +13,14 @@ import javax.mail.internet.MimeUtility;
 import javax.mail.search.FlagTerm;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.Properties;
 import java.util.Vector;
 
 public class MailHandler {
     private static String myMail;
-    private static String mySmtpServer = "stmp.mxhichina.com";
-    private static String myRecvServer = "imap.mxhichina.com";
+    private static String myPass;
+    private static String smtpServer = "stmp.mxhichina.com";
+    private static String imapServer = "imap.mxhichina.com";
     private static String request = "newFriendRequest";
 
     private final static String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -34,8 +33,28 @@ public class MailHandler {
         myMail = mail;
     }
 
-    public static void setMySmtpServert() {
+    public static void setPass(String pass) {
+        myPass = pass;
+    }
 
+    private static String getPass() {
+        return  myPass;
+    }
+
+    public static void setMySmtpServer(String smtp) {
+        smtpServer = smtp;
+    }
+
+    private static String getMySmtpServer() {
+        return smtpServer;
+    }
+
+    public static void setMyIMAPserver(String imap) {
+        imapServer = imap;
+    }
+
+    private static String getMyIMAPserver() {
+        return imapServer;
     }
 
     public static String getMail() throws NullPointerException{
@@ -56,28 +75,68 @@ public class MailHandler {
         return mail;
     }
 
-    public static Boolean send(String toEmail, String text) {
-        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-
-        props.setProperty("mail.smtp.host","smtp.mxhichina.com");
+    private static Session getSessionSend(String email, String pass, String server) {
+        Properties props = System.getProperties();
+        props.setProperty("mail.smtp.host", server);
         props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
         props.setProperty("mail.smtp.socketFactory.fallback", "false");
         props.setProperty("mail.smtp.port", "465");
         props.setProperty("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.auth", "true");
 
-        Session session =  Session.getInstance(props, new Authenticator() {
+        return Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(Secret.getEmail(),Secret.getPass());
+                return new PasswordAuthentication(email, pass);
             }
         });
+    }
 
+    private static Session getSessionRecv(String server) {
+        Properties props = System.getProperties();
+        props.setProperty("mail.imap.host", server);
+        props.setProperty("mail.imap.auth", "true");
+        props.setProperty("mail.imap.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.imap.socketFactory.fallback", "false");
+        props.setProperty("mail.imap.port", "993");
+        props.setProperty("mail.imap.socketFactory.port", "993");
+
+        return Session.getDefaultInstance(props, null);
+    }
+
+    public static Boolean testSMTP(String email, String pass, String server) {
+        Session session = getSessionSend(email, pass, server);
+
+        try {
+            // or use getDefaultInstance instance if desired...
+            Transport transport = session.getTransport("smtp");
+            transport.connect(server, 465, email, pass);
+            transport.close();
+            System.out.println("success");
+        }
+        catch(AuthenticationFailedException e) {
+            System.out.println("AuthenticationFailedException - for authentication failures");
+            e.printStackTrace();
+        }
+        catch(MessagingException e) {
+            System.out.println("for other failures");
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static Boolean testIMAP(String email, String pass, String server) {
+        Session session = getSessionRecv( server);
+        return true;
+    }
+
+    public static Boolean send(String toEmail, String text) {
+        Session session = getSessionSend(getMail(), getPass(), getMySmtpServer());
         // set message
         Message msg = new MimeMessage(session);
         try
         {
-        msg.setFrom(new InternetAddress(myMail));
+        msg.setFrom(new InternetAddress(getMail()));
         msg.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(toEmail, false));
         msg.setSubject("CYY/1.0\r\n");
@@ -93,29 +152,15 @@ public class MailHandler {
         return true;
     }
 
-    private static Session getSessionRecv() {
-        Properties props = System.getProperties();
-        props.setProperty("mail.imap.host", myRecvServer);
-        props.setProperty("mail.imap.auth", "true");
-        props.setProperty("mail.imap.socketFactory.class", SSL_FACTORY);
-        props.setProperty("mail.imap.socketFactory.fallback", "false");
-        props.setProperty("mail.imap.port", "993");
-        props.setProperty("mail.imap.socketFactory.port", "993");
-        return Session.getDefaultInstance(props, null);
-    }
-
     public static Vector<String> receive() {
 
-        URLName urln = new URLName("imap", myRecvServer, 993,
-                null, Secret.getEmail(), Secret.getPass());
+        URLName urln = new URLName("imap", getMyIMAPserver(), 993,
+                null, getMail(), getPass());
 
         try {
-            Store store = getSessionRecv().getStore(urln);
+            Store store = getSessionRecv(getMyIMAPserver()).getStore(urln);
             store.connect();
 
-//            Folder[] folder = store.getDefaultFolder().list();
-//            for(Folder f: folder)
-//                System.out.println(f.getName());
             Folder folder = store.getFolder("Inbox");
             folder.open(Folder.READ_WRITE);
             // search for "unread" messages

@@ -31,6 +31,11 @@ public class UserManager {
         return sentList;
     }
 
+    public static Boolean sentUpdate(String email) {
+        if(getSentList().indexOf(email) != -1)
+           return getSentList().remove(email);
+        else return false;
+    }
     public static Boolean addSend(String email) {
         return getSentList().add(email);
     }
@@ -68,7 +73,7 @@ public class UserManager {
                 "GnuPG 2.0", -1, System.currentTimeMillis(), -1);
 
         IM_capsulation cap = cyy_packet_generator.capsulate("CYYClient 1.0",
-                IM_Handler.ACTION_contactInitializing, "SMTP",
+                IM_Handler.ACTION_contactAddConfirm, "SMTP",
                 MailHandler.getMail(), user);
         String msg = new String(cyy_packet_generator.packet_generate(cap));
 

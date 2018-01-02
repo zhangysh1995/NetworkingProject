@@ -5,6 +5,7 @@ import IM_GUI.Abstract.Controller;
 import IM_GUI.Chatting.P2PchatController;
 import IM_GUI.ListView.FriendListViewController;
 import IM_GUI.ListView.GroupListViewController;
+import Utility.DeMultiplexer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HomeController extends Controller{
     private int sessionNum;
@@ -44,6 +47,10 @@ public class HomeController extends Controller{
     private GroupManager groupManager;
 
     private ConcurrentHashMap<String, Controller> controllerMap;
+    private ConcurrentHashMap<Integer, Controller> groupControllerMap;
+
+    private Thread deMultiplexer;
+    private ExecutorService executor;
 
     @FXML
     public void initialize() {
@@ -60,9 +67,16 @@ public class HomeController extends Controller{
 
         // prepare to receive message
         controllerMap = new ConcurrentHashMap<>(3);
-        controllerMap.put("home", this);
-        // call your thread here
+        controllerMap.put("-1", this);
 
+        groupControllerMap = new ConcurrentHashMap<>(0);
+        groupControllerMap.put(-1, this);
+
+        // callable to receive
+        this.deMultiplexer = new Thread(new DeMultiplexer(groupControllerMap, controllerMap));
+        // asynchronous threading
+        this.executor = Executors.newSingleThreadExecutor();
+        executor.submit(deMultiplexer);
     }
 
     private int getSessionNum() {return this.sessionNum;}
@@ -140,9 +154,18 @@ public class HomeController extends Controller{
         if(friendLVC.addRequest(email)) {
             requestList.setItems(friendLVC.getRequestList());
             return true;
+        } else {
+            return false;
         }
+    }
 
-        else return false;
+    public Boolean pushNewConfirm(String email) {
+        if(friendLVC.sentAccepted(email)) {
+            sentList.setItems(friendLVC.getSentList());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private int getIndex(MouseEvent mouseEvent) {
@@ -168,4 +191,8 @@ public class HomeController extends Controller{
         newStage.show();
     }
 
+    @Override
+    public void shutdown() {
+        executor.shutdown();
+    }
 }

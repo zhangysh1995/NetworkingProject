@@ -18,8 +18,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.io.UnsupportedEncodingException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class P2PchatController extends Controller{
     private MouseEvent mouseEvent;
@@ -32,9 +30,6 @@ public class P2PchatController extends Controller{
 
     private int seqNum;
     private int sessionId;
-
-    private ExecutorService executor;
-    private Thread rthread;
 
     @FXML private Label title;
     @FXML private ScrollPane scrollPane;
@@ -85,14 +80,6 @@ public class P2PchatController extends Controller{
             showNewMessage(msg);
         }
     }
-
-    private void ReceiveMessage(){
-        // callable to receive
-        this.rthread = new Thread(new ReceivingWork(new CYY_PACKET_generator()));
-        // asynchronous threading
-        this.executor = Executors.newSingleThreadExecutor();
-        executor.submit(rthread);
-    };
 
     @Override
     public Boolean pushNewMsg(String msg) {
