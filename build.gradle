@@ -26,6 +26,9 @@ dependencies {
     compile 'name.neuhalfen.projects.crypto.bouncycastle.openpgp:bouncy-gpg:2.+'
     // https://mvnrepository.com/artifact/javax.mail/mail
     compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.0'
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-net', name: 'commons-net', version: '3.6'
 }
 
  sourceSets {

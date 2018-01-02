@@ -14,7 +14,9 @@ import javax.mail.internet.MimeUtility;
 import javax.mail.search.FlagTerm;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Properties;
+import java.util.Vector;
 
 public class MailHandler {
     private static String myMail;
@@ -102,7 +104,7 @@ public class MailHandler {
         return Session.getDefaultInstance(props, null);
     }
 
-    public static String receive() {
+    public static Vector<String> receive() {
 
         URLName urln = new URLName("imap", myRecvServer, 993,
                 null, Secret.getEmail(), Secret.getPass());
@@ -116,17 +118,22 @@ public class MailHandler {
 //                System.out.println(f.getName());
             Folder folder = store.getFolder("Inbox");
             folder.open(Folder.READ_WRITE);
-
             // search for "unread" messages
             Flags unread = new Flags(Flags.Flag.SEEN);
             FlagTerm unreadFlagTerm = new FlagTerm(unread, false);
             Message[] messages = folder.search(unreadFlagTerm);
-
-            if(messages.length > 0) printMessage(messages);
+            Vector<String> result = new Vector<>();
+            for(int i=0;i<messages.length;i++){
+                if(getSubject(messages[i]).toLowerCase().equals("cyy/1.0")){
+                    result.add(getMailContent(messages[i]));
+                }
+            }
+            return result;
+           // if(messages.length > 0) printMessage(messages);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 
     private static void printMessage(Message[] messages) {
