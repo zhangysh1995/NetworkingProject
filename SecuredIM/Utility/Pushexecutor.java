@@ -66,6 +66,11 @@ public class Pushexecutor implements Runnable {
                 /**
                  * confirm is postponed?
                  */
+                HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
+                homeController.pushNewRequest(cap.getSourceEmail());
+            }else if(action.equals(IM_Handler.ACTION_contactAddConfirm)){
+                HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
+                homeController
             }else if(action.equals(IM_Handler.ACTION_individualSending)){
                 controller = this.Individual_session_list.get(cap.getSourceEmail());
                 controller.pushNewMsg(cap.getMessageCyy().getContent());

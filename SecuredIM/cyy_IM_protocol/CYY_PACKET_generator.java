@@ -30,11 +30,6 @@ public class CYY_PACKET_generator implements Cyy_factory {
 
         Message_cyy msg_cyy = new Message_cyy(msg_id, Encryption_type, raw_text.length());
         String encrypted = raw_text;
-        if(Encryption_type.contains(IM_Handler.ENCRYPTION_type_base)){
-            encrypted = GPG.Encrypt(raw_text);
-        }else{
-            System.out.println("the text is not encrypted!!!");
-        }
         msg_cyy.setContent(encrypted);
         this.msg = msg_cyy;
         return msg_cyy;
@@ -66,6 +61,11 @@ public class CYY_PACKET_generator implements Cyy_factory {
         capsulation.setSource(new User(source));
         if(group_id == -1){
             capsulation.setIndividual_Destination(new User(Destination[0]));
+            if(msg.getEncryption_type().contains(IM_Handler.ENCRYPTION_type_base)){
+                String encrypted = GPG.Encrypt(msg.getContent(),source, Destination[0],"123456" );
+            }else{
+                System.out.println("the text is not encrypted!!!");
+            }
         }else {Group g = new Group(group_id);
         
             for(String dest:Destination){
