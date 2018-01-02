@@ -9,6 +9,7 @@ public class GPG_test {
         //gpg.newKey("mac@mail.sustc.edu.cn","123456");
         String encryted = GPG.Encrypt("hello world","mac@mail.sustc.edu.cn","mac@mail.sustc.edu.cn","123456");
         System.out.println(encryted);
+
         System.out.println(GPG.Decrypt(encryted));
 
     }
