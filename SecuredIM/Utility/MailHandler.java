@@ -19,9 +19,8 @@ import java.util.Vector;
 public class MailHandler {
     private static String myMail;
     private static String myPass;
-    private static String smtpServer = "stmp.mxhichina.com";
-    private static String imapServer = "imap.mxhichina.com";
-    private static String request = "newFriendRequest";
+    private static String smtpServer;
+    private static String imapServer;
 
     private final static String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
@@ -117,16 +116,32 @@ public class MailHandler {
         catch(AuthenticationFailedException e) {
             System.out.println("AuthenticationFailedException - for authentication failures");
             e.printStackTrace();
+            return false;
         }
         catch(MessagingException e) {
             System.out.println("for other failures");
             e.printStackTrace();
+            return false;
         }
         return true;
     }
 
     public static Boolean testIMAP(String email, String pass, String server) {
-        Session session = getSessionRecv( server);
+        URLName urln = new URLName("imap", getMyIMAPserver(), 993,
+                null, email, pass);
+
+        try {
+            Store store = getSessionRecv(server).getStore(urln);
+            store.connect();
+        }   catch(AuthenticationFailedException e) {
+            System.out.println("AuthenticationFailedException - for authentication failures");
+            e.printStackTrace();
+            return false;
+        } catch(MessagingException e) {
+            System.out.println("for other failures");
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
