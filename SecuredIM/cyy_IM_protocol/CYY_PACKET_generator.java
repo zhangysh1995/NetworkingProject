@@ -59,6 +59,7 @@ public class CYY_PACKET_generator implements Cyy_factory {
         IM_capsulation capsulation = new IM_capsulation(msg, UserAgent, ACTION_type,checksum, mail_protocol);
         capsulation.setSource(new User(source));
         if(group_id == -1){
+
             capsulation.setGroup_size(0);
             capsulation.setIndividual_Destination(new User(Destination[0]));
             if(msg.getEncryption_type().contains(IM_Handler.ENCRYPTION_type_base)){

@@ -38,7 +38,6 @@ public class DemultiplexerTest {
             +"0\r\n"
             +"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9\r\n"
             +"luoyq@mail.sustc.edu.cn;\r\n"
-            +"-1\r\n"
             +"\r\n"
             +"hello world\r\n"
             +"\r\n"
@@ -46,14 +45,14 @@ public class DemultiplexerTest {
 
     @Test
     public void testPushExecutor() {
-            ExecutorService executor = Executors.newSingleThreadExecutor();
+//            ExecutorService executor = Executors.newSingleThreadExecutor();
 //            Pushexecutor p = new Pushexecutor(testpacket);
-//        Cyy_factory f = Cyy_factory.get_cyyfactory();
-//        IM_capsulation cap = f.packet_parse(packet);
-//        System.out.println("\nSource mail: " + cap.getSourceEmail());
+        Cyy_factory f = Cyy_factory.get_cyyfactory();
+        IM_capsulation cap = f.packet_parse(testpacket);
+        System.out.println("\nSource mail: " + cap.getSourceEmail());
 
-          //  p.run();
-            Thread pushThread = new Thread(new Pushexecutor(packet));
-            executor.submit(pushThread);
+//            p.run();
+//            Thread pushThread = new Thread(new Pushexecutor(packet));
+//            executor.submit(pushThread);
     }
 }
