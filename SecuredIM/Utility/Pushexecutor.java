@@ -66,19 +66,18 @@ public class Pushexecutor implements Runnable {
             User src = cap.getSource();
             String action = cap.getAction_type();
             if(action.equals(IM_Handler.ACTION_contactInitializing)){
-                HomeController homeController = (HomeController) this.Individual_session_list.get("homecontroller");
+                HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
                 homeController.pushNewRequest(cap.getSourceEmail());
                 System.out.println(cap.getSourceEmail());
 
             }else if(action.equals(IM_Handler.ACTION_contactAddConfirm)){
                 /**
-                 * confirm is postponed?
+                 * confirmation need a separate function in home controller if u want to actually use a confirmation
+                 * to before init a contact locally
                  */
                 HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
                 homeController.pushNewRequest(cap.getSourceEmail());
-            }else if(action.equals(IM_Handler.ACTION_contactAddConfirm)){
-                HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
-                homeController.pushNewConfirm(cap.getSourceEmail());
+
             }else if(action.equals(IM_Handler.ACTION_individualSending)){
                 controller = this.Individual_session_list.get(cap.getSourceEmail());
                 controller.pushNewMsg(cap.getMessageCyy().getContent());
