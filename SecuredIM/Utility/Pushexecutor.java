@@ -42,6 +42,7 @@ public class Pushexecutor implements Runnable {
 //        System.out.println("Raw :" + raw_content);
         IM_capsulation cap = factory.packet_parse(raw_content);
         System.out.println("\nSource mail: " + cap.getSourceEmail());
+        System.out.println("Group size: " + cap.getGroup_size());
         Controller controller = null;
         if(cap.getGroup_size()>0){
             /**

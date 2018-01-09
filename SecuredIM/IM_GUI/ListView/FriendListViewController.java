@@ -42,7 +42,7 @@ public class FriendListViewController extends Controller{
         String msg = new String(cyy_packet_generator.packet_generate(cap));
 
         if(MailHandler.send(email,msg)) {
-
+            System.out.println("Content: \n" + msg + "\n ========= end ========");
         } else System.err.println("Error: send friend request");
 
         return UserManager.addSend(email);
