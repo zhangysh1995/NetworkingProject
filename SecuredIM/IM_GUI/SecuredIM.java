@@ -45,19 +45,25 @@ public class SecuredIM extends Application {
 
 
     @FXML
-    protected void testConnect() {
+    protected Boolean testConnect() {
         if(!userEmail.getText().equals("") || !emailPass.getText().equals("")
                 || !smtp.getText().equals("") || !imap.getText().equals("") ||
                 !gpgPass.getText().equals("")) {
             if ( !MailHandler.testSMTP(userEmail.getText(), emailPass.getText(), smtp.getText()) ||
-                    !MailHandler.testIMAP(userEmail.getText(), emailPass.getText(), imap.getText()))
-                    showWarning("Connection IMAP failed.");
+                    !MailHandler.testIMAP(userEmail.getText(), emailPass.getText(), imap.getText())) {
+                showWarning("Connection test failed.");
+                return false;
+            }
             else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Test connection succeed");
                 alert.showAndWait();
+                return true;
             }
 
-        } else showWarning("All fields should be filled!");
+        } else {
+            showWarning("All fields should be filled!");
+            return false;
+        }
     }
 
     private void showWarning(String text) {
@@ -67,7 +73,9 @@ public class SecuredIM extends Application {
 
     @FXML
     protected void handleLogin(ActionEvent actionEvent) throws Exception {
-        testConnect();
+        if(!testConnect())
+            return;
+
         MailHandler.setMail(userEmail.getText());
         MailHandler.setPass(emailPass.getText());
         MailHandler.setMySmtpServer(smtp.getText());

@@ -6,7 +6,10 @@ import cyy_IM_protocol.CYY_PACKET_generator;
 import cyy_IM_protocol.IM_Handler;
 import cyy_IM_protocol.IM_capsulation;
 import cyy_IM_protocol.Message_cyy;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +39,7 @@ public class P2PchatController extends Controller{
     @FXML private TextField userInput;
     @FXML private TextFlow textLog;
 
+    // constructor, default
     public P2PchatController(MouseEvent mouseEvent, int sessionId) {
         this.mouseEvent = mouseEvent;
         this.listView = (ListView) mouseEvent.getSource();
@@ -46,6 +50,8 @@ public class P2PchatController extends Controller{
         this.sessionId = sessionId;
         this.cyy_packet_generator = new CYY_PACKET_generator();
     }
+
+    public String getEmail() {return this.email;}
 
     private int getSessionId() {return this.sessionId;}
 
@@ -64,12 +70,12 @@ public class P2PchatController extends Controller{
 
             IM_capsulation cap = cyy_packet_generator.capsulate("CYYClient 1.0",
                     IM_Handler.ACTION_individualSending, "IMAP",
-                    "zhangyushao@zhangyushao.site", MailHandler.getMail());
+                    MailHandler.getMail(), email);
 
             try {
                 String content = new String(cyy_packet_generator.packet_generate(cap), "UTF-8");
                 System.out.println(content);
-//                mailHandler.sendMessage(email, content);
+                MailHandler.send(email, content);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -84,9 +90,25 @@ public class P2PchatController extends Controller{
     @Override
     public Boolean pushNewMsg(String msg) {
         String text = this.email + ":\n" + msg + "\n";
+        System.out.println("====== My controller received new message: " + msg);
         Text line = new Text(text);
-        showNewMessage(line);
+        Platform.runLater(() -> showNewMessage(line));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        ObservableList<Node> content = textLog.getChildren();
+        for (Node n : content){
+            if (n instanceof Text) {
+                stringBuilder.append(((Text) n).getText());
+            }
+        }
+        System.out.println("Msg log: " + stringBuilder.toString());
+
         return true;
+    }
+
+    private void showNewMessage(Text msg) {
+        textLog.getChildren().add(msg);
+        scrollPane.setVvalue(scrollPane.getHmax());
     }
 
     // life-cycle
@@ -102,10 +124,4 @@ public class P2PchatController extends Controller{
     public void shutdown() {
         System.out.println("Exited");
     }
-
-    private void showNewMessage(Text msg) {
-        textLog.getChildren().add(msg);
-        scrollPane.setVvalue(scrollPane.getHmax());
-    }
-
 }

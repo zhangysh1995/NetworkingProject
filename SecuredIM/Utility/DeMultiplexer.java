@@ -33,6 +33,7 @@ public class DeMultiplexer implements Runnable{
     public void run(){
         while(true){
             Vector<String> result = MailHandler.receive();
+            System.out.println("Try to receive new messages...");
             for(String r : result) {
                 System.out.println(r);
             }
@@ -43,7 +44,7 @@ public class DeMultiplexer implements Runnable{
             }
 //            this.executor.shutdown();
             try {
-                this.wait(3000L);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -6,6 +6,7 @@ import IM_GUI.Chatting.P2PchatController;
 import IM_GUI.ListView.FriendListViewController;
 import IM_GUI.ListView.GroupListViewController;
 import Utility.DeMultiplexer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,12 +46,20 @@ public class HomeController extends Controller{
     @FXML private TextField notes;
 
     private GroupManager groupManager;
-
     private ConcurrentHashMap<String, Controller> controllerMap;
     private ConcurrentHashMap<Integer, Controller> groupControllerMap;
 
     private Thread deMultiplexer;
     private ExecutorService executor;
+
+    // getters & setters
+    public ConcurrentHashMap<String, Controller> getControllerMap() {
+        return controllerMap;
+    }
+
+    public void updateControllerMap(String email, Controller controller) {
+        this.controllerMap.put(email, controller);
+    }
 
     @FXML
     public void initialize() {
@@ -109,6 +118,8 @@ public class HomeController extends Controller{
 
                 P2PchatController pchatController = new P2PchatController(mouseEvent, getSessionNum());
                 newWindow("../Chatting/P2Pchat.fxml", pchatController);
+                // add this controller to container
+                updateControllerMap(pchatController.getEmail(), pchatController);
             }
 
         } else if(mouseEvent.getClickCount() == 2) {
@@ -195,5 +206,7 @@ public class HomeController extends Controller{
     @Override
     public void shutdown() {
         executor.shutdown();
+        Platform.exit();
+        System.exit(0);
     }
 }

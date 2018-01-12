@@ -3,6 +3,7 @@ package Utility;
 import DataManager.Group;
 import DataManager.User;
 import IM_GUI.Abstract.Controller;
+import IM_GUI.Chatting.P2PchatController;
 import IM_GUI.Home.HomeController;
 import cyy_IM_protocol.Cyy_factory;
 import cyy_IM_protocol.IM_Handler;
@@ -67,6 +68,7 @@ public class Pushexecutor implements Runnable {
             User src = cap.getSource();
             String action = cap.getAction_type();
             if(action.equals(IM_Handler.ACTION_contactInitializing)){
+                System.out.println("====== Get new friend request from: " + cap.getSourceEmail());
                 HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
                 homeController.pushNewRequest(cap.getSourceEmail());
                 System.out.println(cap.getSourceEmail());
@@ -76,12 +78,16 @@ public class Pushexecutor implements Runnable {
                  * confirmation need a separate function in home controller if u want to actually use a confirmation
                  * to before init a contact locally
                  */
+                System.out.println("====== Get new friend request confirmation from: " + cap.getSourceEmail());
                 HomeController homeController = (HomeController) this.Individual_session_list.get("-1");
-                homeController.pushNewRequest(cap.getSourceEmail());
+                homeController.pushNewConfirm(cap.getSourceEmail());
 
             }else if(action.equals(IM_Handler.ACTION_individualSending)){
-                controller = this.Individual_session_list.get(cap.getSourceEmail());
-                controller.pushNewMsg(cap.getMessageCyy().getContent());
+                System.out.println("====== Prepare to push new message... ======");
+                System.out.println("====== Message from: " + cap.getSourceEmail());
+                System.out.println("====== message " + cap.getMessageCyy().getContent());
+                P2PchatController p2PchatController = (P2PchatController) this.Individual_session_list.get(cap.getSourceEmail());
+                p2PchatController.pushNewMsg(cap.getMessageCyy().getContent());
 
             }else {
                 /**

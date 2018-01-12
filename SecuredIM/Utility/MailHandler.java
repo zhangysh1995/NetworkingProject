@@ -154,7 +154,7 @@ public class MailHandler {
         msg.setFrom(new InternetAddress(getMail()));
         msg.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(toEmail, false));
-        msg.setSubject("CYY/1.0\r\n");
+        msg.setSubject("CYY/0.1\r\n");
 
         msg.setText(text);
         msg.setSentDate(new Date());
@@ -184,7 +184,7 @@ public class MailHandler {
             Message[] messages = folder.search(unreadFlagTerm);
             Vector<String> result = new Vector<>();
             for(int i=0;i<messages.length;i++){
-                if(getSubject(messages[i]).toLowerCase().equals("cyy/1.0")){
+                if(getSubject(messages[i]).toLowerCase().equals("cyy/0.1")){
                     result.add(getMailContent(messages[i]));
                 }
             }
@@ -200,7 +200,7 @@ public class MailHandler {
         try{
             for(int i = 0; i < messages.length; i++) {
                 // only process cyy related emails
-                if(!getSubject(messages[i]).toLowerCase().equals("cyy/1.0"))
+                if(!getSubject(messages[i]).toLowerCase().equals("cyy/0.1"))
                     continue;
                 String content = getMailContent(messages[i]);
                 System.out.println("=====================>>开始显示邮件内容<<=====================");
