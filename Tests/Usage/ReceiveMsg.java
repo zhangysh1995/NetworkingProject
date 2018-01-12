@@ -1,12 +1,9 @@
 package Usage;
 
 import Utility.MailHandler;
-import Utility.Pushexecutor;
 import org.junit.Test;
 
 import java.util.Vector;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ReceiveMsg {
     // auto-generated stub
@@ -20,9 +17,7 @@ public class ReceiveMsg {
         Vector<String> result = MailHandler.receive();
 
         for(String content: result){
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            Thread pushThread = new Thread(new Pushexecutor(content));
-            executor.submit(pushThread);
+            System.out.println(content);
         }
     }
 }

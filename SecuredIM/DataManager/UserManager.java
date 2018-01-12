@@ -10,8 +10,7 @@ import java.util.Vector;
 
 public class UserManager {
     private static  Vector<String> friendList
-            = new Vector<>(Arrays.asList("zhangyushao@zhangyushao.site",
-            "mac@mail.sustc.edu.cn", "test@zhangyushao.site","Sue"));
+            = new Vector<>(Arrays.asList("mac@mail.sustc.edu.cn", "Sue"));
     private static Vector<String> requestList
             = new Vector<>(Arrays.asList("Bob@example.com", "Sam@example.com"));
     private static Vector<String> sentList
@@ -33,8 +32,10 @@ public class UserManager {
     }
 
     public static Boolean sentUpdate(String email) {
-        if(getSentList().indexOf(email) != -1)
-           return getSentList().remove(email);
+        if(getSentList().indexOf(email) != -1) {
+            addFriend(email);
+            return getSentList().remove(email);
+        }
         else return false;
     }
     public static Boolean addSend(String email) {

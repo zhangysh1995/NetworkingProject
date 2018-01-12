@@ -5,11 +5,8 @@ import Utility.MailHandler;
 import cyy_IM_protocol.CYY_PACKET_generator;
 import cyy_IM_protocol.IM_Handler;
 import cyy_IM_protocol.IM_capsulation;
-import cyy_IM_protocol.Message_cyy;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -65,7 +62,7 @@ public class P2PchatController extends Controller{
             String input = ":\n" + userInput.getText() + "\n";
 
             // prepare to send
-            Message_cyy message = cyy_packet_generator.create_messageObj(userInput.getText(),
+            cyy_packet_generator.create_messageObj(userInput.getText(),
                     "GnuPG 2.0", getSeqNum(), System.currentTimeMillis(), getSessionId());
 
             IM_capsulation cap = cyy_packet_generator.capsulate("CYYClient 1.0",
@@ -93,15 +90,6 @@ public class P2PchatController extends Controller{
         System.out.println("====== My controller received new message: " + msg);
         Text line = new Text(text);
         Platform.runLater(() -> showNewMessage(line));
-
-        StringBuilder stringBuilder = new StringBuilder();
-        ObservableList<Node> content = textLog.getChildren();
-        for (Node n : content){
-            if (n instanceof Text) {
-                stringBuilder.append(((Text) n).getText());
-            }
-        }
-        System.out.println("Msg log: " + stringBuilder.toString());
 
         return true;
     }

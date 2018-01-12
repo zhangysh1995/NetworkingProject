@@ -151,15 +151,15 @@ public class MailHandler {
         Message msg = new MimeMessage(session);
         try
         {
-        msg.setFrom(new InternetAddress(getMail()));
-        msg.setRecipients(Message.RecipientType.TO,
-                InternetAddress.parse(toEmail, false));
-        msg.setSubject("CYY/0.1\r\n");
+            msg.setFrom(new InternetAddress(getMail()));
+            msg.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(toEmail, false));
+            msg.setSubject("CYY/0.1\r\n");
 
-        msg.setText(text);
-        msg.setSentDate(new Date());
+            msg.setText(text);
+            msg.setSentDate(new Date());
 
-        Transport.send(msg);
+            Transport.send(msg);
         } catch(MessagingException e) {
             System.err.println("Error when constructing the message");
         }

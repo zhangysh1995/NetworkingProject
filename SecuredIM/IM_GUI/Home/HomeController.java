@@ -164,7 +164,7 @@ public class HomeController extends Controller{
     public Boolean pushNewRequest(String email) {
         System.out.println("Received requests: " +email);
         if(friendLVC.addRequest(email)) {
-            requestList.setItems(friendLVC.getRequestList());
+            Platform.runLater(() -> requestList.setItems(friendLVC.getRequestList()));
             return true;
         } else {
             return false;
@@ -173,7 +173,8 @@ public class HomeController extends Controller{
 
     public Boolean pushNewConfirm(String email) {
         if(friendLVC.sentAccepted(email)) {
-            sentList.setItems(friendLVC.getSentList());
+            Platform.runLater(() -> sentList.setItems(friendLVC.getSentList()));
+            Platform.runLater(() -> friendList.setItems(friendLVC.getFriendList()));
             return true;
         } else {
             return false;
@@ -206,7 +207,7 @@ public class HomeController extends Controller{
     @Override
     public void shutdown() {
         executor.shutdown();
-        Platform.exit();
-        System.exit(0);
+//        Platform.exit();
+//        System.exit(0);
     }
 }
