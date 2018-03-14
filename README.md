@@ -15,5 +15,7 @@ For project description, please see [Project I Secured IM Application](Descripti
 *  Run `SecuredIM -> IM_GUI -> SecuredIM`
 
 ## Credits
+Thanks for my classmates Ma Ce@ToTMA who contributed to the underlying frustructures for protocol-like communications.
 
 ## License
+GPL v3
